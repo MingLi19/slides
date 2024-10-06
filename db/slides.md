@@ -39,19 +39,39 @@ h1 {
 }
 </style>
 ---
-transition: fade
+
+# 课程大纲
+
+<Toc v-click columns="2" minDepth="2" maxDepth="2"></Toc>
+
 ---
 
-## 什么是NoSQL数据库
+### NoSQL兴起背景
 
 <img v-click class="w-100 p-4" border="rounded" src="./images/noSQL.png" alt="noSQL">
 
 ---
 
-## 关系型数据库
-
-- 固定的表结构：表、行、列  
-<img v-click class="w-100 p-4" border="rounded" src="./images/rmdb_demo.png" alt="noSQL">
+### 关系型数据库
+<br>  
+<v-switch>
+  <template #1> 
+    - 固定的表结构：表、行、列 
+    <img class="w-100 p-4" border="rounded" src="./images/rmdb_demo.png" alt="noSQL">
+  </template>
+  <template #2> 
+    - 固定的表结构：表、行、列
+    <br>
+    - 高效的查询处理
+  </template>
+  <template #3> 
+    - 固定的表结构：表、行、列
+    <br>
+    - 高效的查询处理
+    <br>
+    - 完善的事务管理机制
+  </template>
+</v-switch>
 
 ---
 layout: two-cols
@@ -70,16 +90,13 @@ layoutClass: gap-8
 
 <img v-click class="w-100" border="rounded" src="./images/db_map.jpeg" alt="db_map">
 
----
-
-## 课程大纲
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
 
 
 ---
-src: ./pages/mongodb.md # Reuse the same file
+src: ./pages/mongodb.md 
 ---
 ---
-src: ./pages/redis.md # Reuse the same file
+src: ./pages/redis.md
+---
+src: ./pages/neo4j.md
 ---

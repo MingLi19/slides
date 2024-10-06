@@ -19,8 +19,8 @@ MongoDB 中的记录是一个文档，它是由字段和值对组成的数据结
 
 ---
 
-## MongoDB - 主要功能
-- 高性能
+### MongoDB - 主要功能
+- 高性能 & 灵活
 - 查询 API
   - 读写操作(CRUD)
   - 数据聚合
@@ -30,7 +30,6 @@ MongoDB 中的记录是一个文档，它是由字段和值对组成的数据结
   - 数据冗余
 - 横向可扩展性 Sharding
 - 支持多种存储引擎
-MongoDB 支持多种存储引擎：
   - WiredTiger 
   - In-Memory 
 
@@ -41,7 +40,20 @@ MongoDB 提供高性能数据持久性。尤其是，对嵌入式数据模型的
 -->
 ---
 
-## MongoDB - 安装
+### MongoDB - 术语和概念
+
+|     |     |
+| --- | --- |
+| 数据表（table） | 集合（collection） |
+| 行（row） | 文档（document） |
+| 列（column） | 字段（field） |
+| 主键（primary key） | `_id` 字段 |
+| 索引（index） | 索引（index） |
+| 表连接 | 嵌入式文档 |
+| 事务 | 事务（减少对多文档事务的需求） |
+---
+
+### MongoDB - 安装
 
 - 安装Mongodb Server
 ```bash
@@ -53,7 +65,7 @@ MongoDB 提供高性能数据持久性。尤其是，对嵌入式数据模型的
 
 ---
 
-## MongoDB - CRUD 操作
+### MongoDB - CRUD 操作
 <v-clicks depth="2">
 
 - 插入文档
@@ -68,28 +80,198 @@ MongoDB 提供高性能数据持久性。尤其是，对嵌入式数据模型的
 - 删除文档
   - db.collection.deleteOne()
   - db.collection.deleteMany()
-
+- 聚合操作
+  - db.collection.aggregate()
 </v-clicks>
 
 ---
-layout: image
-image: https://media.giphy.com/media/13GIgrGdslD9oQ/giphy.gif
----
 
-### Coding Time
+### MongoDB - 举例
 
-<style>
-h3 {
-  color: white !important;
-  @apply !text-shadow-lg;
-  @apply !text-center;
-  @apply !text-8xl
+下表列出了各种 SQL 语句和相应的 MongoDB 语句。该表中的示例假定以下条件：
+- 这些 SQL 示例假设有一个名为 people 的表。
+- MongoDB 示例假设一个名为 people 的集合包含以下原型的文档：
+```json
+{
+  "_id" : ObjectId("507f191e810c19729de860ea"),
+  "name" : "Alice",
+  "age" : 25,
+  "status" : "A"
 }
-</style>
+```
 
 ---
 
-## 优势
-- 高灵活性 Flexable Schema
-- 高可靠 (Reliability)
-- 高性能 (Scalability) 
+### SQL VS MongoDB DDL
+<div grid="~ cols-2 gap-4">
+<div>
+
+#### SQL
+
+```sql
+CREATE TABLE people (
+    id MEDIUMINT NOT NULL
+        AUTO_INCREMENT,
+    user_id Varchar(30),
+    age Number,
+    status char(1),
+    PRIMARY KEY (id)
+)
+
+ALTER TABLE people
+ADD join_date DATETIME
+
+ALTER TABLE people
+DROP COLUMN join_date
+
+DROP TABLE people
+```
+</div>
+<div>
+
+#### MongoDB
+
+```javascript
+// db.createCollection("people")
+db.people.insertOne( {
+    user_id: "abc123",
+    age: 55,
+    status: "A"
+ } )
+ 
+db.people.updateMany(
+    {}, { $set: { join_date: new Date() } }
+)
+
+db.people.updateMany(
+    {}, { $unset: { "join_date": "" } }
+)
+
+db.people.drop()
+```
+</div>
+</div>
+
+<!--
+在第一个 insertOne() 或 insertMany() 操作上隐式创建。如果未指定 _id 字段，则会自动添加主键 _id。
+集合并不描述或强制执行其文档的结构。`updateMany()`操作可以使用 $set 操作符将字段添加到现有文档中,也可以使用 $unset 操作符从文档中删除字段。
+-->
+
+---
+
+### SQL VS MongoDB 索引
+<div grid="~ cols-2 gap-4">
+<div>
+
+#### SQL
+单个索引
+```sql
+CREATE INDEX idx_user_id_asc
+ON people(user_id)
+```
+复合索引
+```sql
+CREATE INDEX
+       idx_user_id_asc_age_desc
+ON people(user_id, age DESC)
+```
+</div>
+<div>
+
+#### MongoDB
+单个索引
+```javascript
+db.people.createIndex( { user_id: 1 } )
+```
+复合索引
+```javascript
+db.people.createIndex( { user_id: 1, age: -1 } )
+```
+</div>
+</div>
+---
+
+### SQL VS MongoDB Insert
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+#### SQL 插入语句
+```sql
+INSERT INTO people(user_id,
+                  age,
+                  status)
+VALUES ("bcd001",
+        45,
+        "A")
+```
+</div>
+<div>
+
+#### MongoDB insertOne语句
+```javascript
+db.people.insertOne( {
+    user_id: "bcd001",
+    age: 45,
+    status: "A"
+ } )
+```
+</div>
+</div>
+
+---
+
+### SQL VS MongoDB Select
+<div grid="~ cols-2 gap-4">
+<div>
+
+#### SQL SELECT语句
+```sql
+SELECT *
+FROM people
+
+SELECT id,
+       user_id,
+       status
+FROM people
+
+SELECT user_id, status
+FROM people
+
+SELECT *
+FROM people
+WHERE status = "A"
+
+SELECT user_id, status
+FROM people
+WHERE status = "A"
+```
+</div>
+
+<div>
+
+#### MongoDB find语句
+```javascript
+db.people.find()
+
+db.people.find(
+    {},
+    { user_id: 1, status: 1 }
+)
+
+db.people.find(
+    {},
+    { user_id: 1, status: 1 }
+)
+
+db.people.find(
+    { status: "A" }
+)
+
+db.people.find(
+    { status: "A" },
+    { user_id: 1, status: 1 }
+)
+```
+</div>
+</div>
