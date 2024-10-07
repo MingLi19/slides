@@ -18,6 +18,20 @@ MongoDB 中的记录是一个文档，它是由字段和值对组成的数据结
 
 ---
 
+### MongoDB - 术语和概念
+
+|  SQL   | MongoDB    |
+| --- | --- |
+| 数据表（table） | 集合（collection） |
+| 行（row） | 文档（document） |
+| 列（column） | 字段（field） |
+| 主键（primary key） | `_id` 字段 |
+| 索引（index） | 索引（index） |
+| 表连接 | 嵌入式文档 |
+| 事务 | 事务（减少对多文档事务的需求） |
+
+---
+
 ### MongoDB - 主要功能
 - 高性能 & 灵活
 - 查询 API
@@ -37,19 +51,6 @@ MongoDB 提供高性能数据持久性。尤其是，对嵌入式数据模型的
 副本集是一组 MongoDB 服务器，它们维护相同的数据集，并可提供冗余和提高数据可用性。
 从 3.4 开始，MongoDB 支持基于分片键创建数据的区域。在均衡的集群中，MongoDB 仅将区域覆盖的读写定向到区域内的那些分片。
 -->
----
-
-### MongoDB - 术语和概念
-
-|     |     |
-| --- | --- |
-| 数据表（table） | 集合（collection） |
-| 行（row） | 文档（document） |
-| 列（column） | 字段（field） |
-| 主键（primary key） | `_id` 字段 |
-| 索引（index） | 索引（index） |
-| 表连接 | 嵌入式文档 |
-| 事务 | 事务（减少对多文档事务的需求） |
 ---
 
 ### MongoDB - 安装
