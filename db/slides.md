@@ -16,7 +16,7 @@ mdc: true
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Let's rock 🤘<carbon:arrow-right class="inline"/>
+    Let's Go 🚀<carbon:arrow-right class="inline"/>
   </span>
 </div>
 
@@ -42,61 +42,17 @@ h1 {
 
 # 课程大纲
 
-<Toc v-click columns="2" minDepth="2" maxDepth="2"></Toc>
+<Toc v-click columns="2" minDepth="2" maxDepth="3" mode="onlyCurrentTree"></Toc>
 
 ---
-
-### NoSQL兴起背景
-
-<img v-click class="w-100 p-4" border="rounded" src="./images/noSQL.png" alt="noSQL">
-
+src: ./pages/nosql.md
 ---
-
-### 关系型数据库
-<br>  
-<v-switch>
-  <template #1> 
-    - 固定的表结构：表、行、列 
-    <img class="w-100 p-4" border="rounded" src="./images/rmdb_demo.png" alt="noSQL">
-  </template>
-  <template #2> 
-    - 固定的表结构：表、行、列
-    <br>
-    - 高效的查询处理
-  </template>
-  <template #3> 
-    - 固定的表结构：表、行、列
-    <br>
-    - 高效的查询处理
-    <br>
-    - 完善的事务管理机制
-  </template>
-</v-switch>
-
 ---
-layout: two-cols
-layoutClass: gap-8
----
-
-## 数据库概览
-
-<br />
-
-<img class="w-100" border="rounded" src="./images/db_rank.png" alt="db_rank">
-
-来源于 [DB-engines](https://db-engines.com/en/ranking)
-
-::right::
-
-<img v-click class="w-100" border="rounded" src="./images/db_map.jpeg" alt="db_map">
-
-
-
----
-src: ./pages/mongodb.md 
+src: ./pages/mongodb.md
 ---
 ---
 src: ./pages/redis.md
+---
 ---
 src: ./pages/neo4j.md
 ---
