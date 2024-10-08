@@ -45,7 +45,7 @@ h1 {
 <Toc v-click columns="2" minDepth="2" maxDepth="3" mode="onlyCurrentTree"></Toc>
 
 ---
-class: text-center
+layout: center
 ---
 
 # SQL到NoSQL的转变
@@ -55,7 +55,7 @@ src: ./pages/nosql.md
 ---
 
 ---
-class: text-center
+layout: center
 ---
 
 # 文档数据库 - MongoDB
@@ -65,7 +65,7 @@ src: ./pages/mongodb.md
 ---
 
 ---
-class: text-center
+layout: center
 ---
 
 # 键值数据库 - Redis
@@ -74,10 +74,20 @@ src: ./pages/redis.md
 ---
 
 ---
-class: text-center
+layout: center
 ---
 
 # 图数据库 - Neo4j
 ---
 src: ./pages/neo4j.md
 ---
+
+---
+layout: center
+---
+
+# 列数据库 - Hbase
+---
+src: ./pages/hbase.md
+---
+
