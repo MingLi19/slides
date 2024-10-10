@@ -1,26 +1,21 @@
-
-### HBase概述
-
 #### 谷歌BigTable的开源实现
 
-<v-clicks depths="2">
+<v-switch>
 
 BigTable:
 - 分布式存储系统(列族), 起初用于解决典型的互联网搜索问题
-    <div v-click.hide>
     1. 爬虫持续不断地抓取新页面，这些页面每页一行地存储到BigTable里 
     2. MapReduce计算作业运行在整张表上，生成索引，为网络搜索应用做准备
     3. 用户发起网络搜索请求
     4. 网络搜索应用查询建立好的索引，从BigTable得到网页 
     5. 搜索结果提交给用户
-    </div>
 - 利用MapReduce分布式并行计算模型来处理海量数据
 - 使用分布式文件系统GFS作为其底层数据存储方式
 - 采用Chubby提供协同管理服务
 - 可扩展到PB级别的数据和上千台机器
 - 具备广泛应用性、可扩展性、高性能和高可用性等特点
 
-</v-clicks>
+</v-switch>
 
 <img class="w-100" border="rounded" src="../images/web_crawler.png">
 

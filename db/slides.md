@@ -8,6 +8,7 @@ drawings:
 transition: slide-left
 codeCopy: true
 mdc: true
+hideInToc: true
 ---
 
 # NoSQL数据库
@@ -39,10 +40,13 @@ h1 {
 }
 </style>
 ---
+hideInToc: true
+---
 
 # 课程大纲
 
-<Toc v-click columns="2" minDepth="2" maxDepth="3" mode="onlyCurrentTree"></Toc>
+<Toc minDepth="1" maxDepth="2"></Toc>
+
 
 ---
 layout: center

@@ -3,11 +3,11 @@ layout: two-cols
 layoutClass: gap-4
 ---
 
-### 关系数据库之父 - Edgar F. Codd
+### 很久很久以前...
 
 <img class="w-100 p-4" border="rounded" src="../images/codd.png">
 
-来源: [IBM](https://www.ibm.com/history/edgar-codd)
+关系数据库之父 - Edgar F. Codd。来源: [IBM](https://www.ibm.com/history/edgar-codd)
 
 ::right::
 
@@ -17,7 +17,7 @@ layoutClass: gap-4
 
 ---
 
-### 关系型数据库 (RDBMS)
+## 关系型数据库 (RDBMS)
 
 <br>  
 <v-switch>
@@ -47,7 +47,7 @@ layoutClass: gap-4
 
 ---
 
-### ACID
+## ACID
 
 <v-clicks depths="2">
 
@@ -60,9 +60,6 @@ layoutClass: gap-4
 - **I** (Isolation：隔离性)
   - 事务之间是相互隔离的，一个事务的执行不会影响其他事务。
   - 事务之间的隔离性是通过锁机制实现的。
-- **D** (Durability：持久性)
-  - 一旦事务提交，其结果将永久保存在数据库中，即使系统崩溃也不会丢失。
-  - 通常通过将事务日志写入磁盘来实现。
 
 </v-clicks>
 
@@ -73,8 +70,7 @@ I: 比如现在有个交易是从A账户转100元至B账户，在这个交易还
 -->
 ---
 
-### 多事务并发
-
+### 隔离性 - 事务并发问题
 ❗❗❗数据不一致
 
 <v-clicks depths="2">
@@ -93,9 +89,7 @@ I: 比如现在有个交易是从A账户转100元至B账户，在这个交易还
 
 ---
 
-### 隔离级别
-
-<v-clicks depths="2">
+### 隔离性 - 隔离级别
 
 - **读未提交 (READ UNCOMMITTED)**：
   - 最低的隔离级别。
@@ -105,18 +99,17 @@ I: 比如现在有个交易是从A账户转100元至B账户，在这个交易还
   - 一个事务只能读取其他事务已经提交的数据更改。
   - 防止了脏读，但仍可能出现不可重复读和幻读问题。
 - **可重复读 (REPEATABLE READ)**：
-  - 一个事务可以读取其他事务已提交的数据，但不允许其他事务插入或更新已读取的数据，直到当前事务结束。
+  - 一个事务可以读取其他事务已提交的数据，但不允许其他事务插入或更新已读取的数据。
   - 防止脏读和不可重复读，但仍可能出现幻读问题。
 - **串行化 (SERIALIZABLE)**：
   - 最高的隔离级别，确保并发事务不会产生冲突。
   - 任何一个事务的读或写都会锁定相关的数据，直到事务结束。
-  - 可以完全防止脏读、不可重复读和幻读问题，但致使事务并发性较低且性能开销较大。
-
-</v-clicks>
+  - 可以完全防止脏读、不可重复读和幻读问题，但致使<span v-mark.underline.orange>事务并发性较低且性能开销较大</span>。 
 
 ---
 
-### ACID
+### ACID - 完
+<br>
 
 - **A** (Atomicity：原子性)
   - 事务被视为不可分割的单元，要么全部执行成功，要么全部失败。
@@ -133,7 +126,7 @@ I: 比如现在有个交易是从A账户转100元至B账户，在这个交易还
 
 ---
 
-### 事务举例 - 数据结构
+## 事务举例
 
 - 船舶信息表 (Ship)
 <img class="w-100 p-1" border="rounded" src="../images/t_ship.png">
@@ -155,12 +148,13 @@ layoutClass: gap-4
 2. 创建维修记录：针对一条船舶创建一条维修记录，包括维修日期、维修类型和维修费用。
 3. 更新船舶信息：更新船舶的最后维护日期和船龄，以反映维修的发生。
 4. 维修费用：将维修费用添加到公司的财务记录表中。
-
+</v-clicks>
 <br>
+<v-clicks>
 
 - 确保所有维修信息和财务记录是永久的 -> **（D）**。
 - 如果在任何步骤中出现问题，事务将被回滚，以确保数据的一致性 -> **（A & C）**。
-- 事务应该是独立的，不应该受到其他事务的影响 -> **（I）**。
+- 事务是独立的，不受到其他事务的影响 -> **（I）**。
 </v-clicks>
 
 ::right::
@@ -174,34 +168,40 @@ layoutClass: gap-4
 
 ---
 
-### NoSQL数据库 - 兴起背景
+## NoSQL数据库 - 兴起背景
 <br>  
-<v-switch>
-  <template #1> 
-    <img class="w-100 p-1" border="rounded" src="../images/web1.png">
-  </template>
-  <template #2> 
-    <img class="w-100 p-1" border="rounded" src="../images/web2.png">
-  </template>
-  <template #3> 
-    <img class="w-100 p-1" border="rounded" src="../images/web3.png">
-  </template>
-</v-switch>
+<Transform :scale="2">
+  <v-switch>
+    <template #1> 
+      <img class="w-100 p-1" border="rounded" src="../images/web1.png">
+    </template>
+    <template #2> 
+      <img class="w-100 p-1" border="rounded" src="../images/web2.png">
+    </template>
+    <template #3> 
+      <img class="w-100 p-1" border="rounded" src="../images/web3.png">
+    </template>
+  </v-switch>
+</Transform>
 
 ---
 layout: two-cols
 layoutClass: gap-4
 ---
 
-### 数据的增长
+### 数据量 - 爆发式增长
 <br>
 <img class="w-80 p-1" border="rounded" src="../images/data_grow.png">
 
+来源: [w3resource](https://www.w3resource.com/mongodb/nosql.php)
+
 ::right::
 
-### 数据的增长
+### 数据多样性 - 结构化 vs. 非结构化
 <br>
 <img class="w-100 p-1" border="rounded" src="../images/unstructured_data.png">
+
+来源: [IDC Digital Universe Study](https://www.crn.com/news/storage/231000629/idc-digital-universe-study-issues-opportunities-from-the-data-explosion)
 
 ---
 
@@ -209,11 +209,13 @@ layoutClass: gap-4
 
 NoSQL一词最早出现于1998年，是Carlo Strozzi开发的一个轻量、开源、不提供SQL功能的关系数据库。
 
-2009年，Last.fm的Johan Oskarsson发起了一次关于分布式开源数据库的讨论，来自Rackspace的Eric Evans再次提出了NoSQL的概念，这时的NoSQL主要指非关系型、分布式、不提供ACID的数据库设计模式。
+2009年，Last.fm的Johan Oskarsson发起了一次关于分布式开源数据库的讨论，来自Rackspace的Eric Evans再次提出了NoSQL的概念，这时的NoSQL主要指<span v-mark.circle.orange="2">非关系型</span>、<span v-mark.circle.orange="3">分布式</span>、<span v-mark.circle.orange="4">不提供ACID</span>的数据库设计模式。
 
 2009年在亚特兰大举行的"no:sql(east)"讨论会是一个里程碑，其口号是"select fun, profit from real_world where relational=false;"。因此，对NoSQL最普遍的解释是"非关联型的"，强调Key-Value Stores和文档数据库的优点，而不是单纯的反对RDBMS。
 
-<img v-click class="w-100 p-4" border="rounded" src="../images/noSQL.png" alt="noSQL">
+<Transform :scale="2">
+  <img v-click=[5] class="w-100 p-4" border="rounded" src="../images/noSQL.png" alt="noSQL">
+</Transform>
 
 ---
 
@@ -241,50 +243,10 @@ layout: two-cols
 layoutClass: gap-8
 ---
 
-## 数据库概览
-
-<br />
-
-<img class="w-100" border="rounded" src="../images/db_rank.png" alt="db_rank">
-
-来源于 [DB-engines](https://db-engines.com/en/ranking)
-
-::right::
-
-<img v-click class="w-100" border="rounded" src="../images/db_map.jpeg" alt="db_map">
-
----
-layout: two-cols
-layoutClass: gap-8
----
-
-### 这次我们学习的是...
-
-- 键值数据库
-- 列族数据库
-- 文档数据库
-- 图数据库
-
-<p v-click> p.s. 这些分类并不是互斥的，很多数据库可以同时属于多个分类。</p>
-
-<br>
-<br>
-
-<div v-click="'+1'" class="text-xl font-bold"> 但是在这之前, 
-<br>还有两个很重要的概念( CAP , BASE )要先讲🤔</div>
-
-::right::
-
-<img class="w-100" border="rounded" src="../images/noSQL_cat.png">
-
-
-
----
-layout: two-cols
-layoutClass: gap-8
----
-
 ### CAP定理 
+<br>
+
+>The CAP theorem, first introduced by Eric Brewer in 2000 and formalized in 2002, outlines the trade-offs between consistency, availability, and partition tolerance in distributed systems. This theorem serves as a guide for designing robust systems that can manage the complexities of distributed data. Quote: [CAP Theorem](https://dev.to/muhammetyasinarli/-the-cap-theorem-brewers-theorem-in-nosql-databases-2lbj)
 
 <v-clicks depths=2>
 
@@ -295,13 +257,14 @@ layoutClass: gap-8
 - **P** (Partition Tolerance：分区容错性)
   - 系统在网络分区的情况下仍然能够继续工作。
 
+<span v-mark.circle.orange="4">最多同时</span>满足两个: CA , CP , AP
+
 </v-clicks>
 
 ::right::
 
 <img v-click class="w-100" border="rounded" src="../images/cap.png">
 
-<p v-click>CAP无法同时满足,最多两个: CA , CP , AP</p>
 
 <!--
 [click]
@@ -320,6 +283,7 @@ AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求
 ---
 
 ### BASE理论
+<br>
 
 <v-clicks depths=2>
 
@@ -360,6 +324,13 @@ layoutClass: gap-8
 
 <br>
 
+<div class="grid grid-cols-3 gap-4">
+  <Counter :label="'W'" :count="1" />
+  <Counter :label="'R'" :count="1" />
+  <Counter :label="'N'" :count="2" />
+</div>
+
+<br>
 高可用 -> 减少W，增加R，降低一致性
 
 ::right::
@@ -426,3 +397,39 @@ architecture-beta
 不同的N,W,R组合，是在可用性和一致性之间取一个平衡，以适应不同的应用场景。
 强一致性：N=W, R=1，任何一个写节点失效，都会导致写失败，因此可用性会降低。
 -->
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+## 当前数据库概览
+
+<br />
+
+<img class="w-100" border="rounded" src="../images/db_rank.png" alt="db_rank">
+
+来源于 [DB-engines](https://db-engines.com/en/ranking)
+
+::right::
+
+<img v-click class="w-100" border="rounded" src="../images/db_map.jpeg" alt="db_map">
+
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+### 这次我们学习的是...
+<br>
+
+- 文档数据库 - MongoDB
+- 键值数据库 - Redis
+- 图数据库 - Neo4j
+- 列族数据库 - HBase
+
+<p v-click> P.S. 这些分类并<span v-mark.red="4">不是互斥</span>的，很多数据库可以同时属于多个分类。</p>
+
+::right::
+
+<img class="w-100" border="rounded" src="../images/noSQL_cat.png">
+

@@ -3,20 +3,54 @@ layout: two-cols
 layoutClass: gap-8
 ---
 
-### Redis - 开源内存数据库
+### 开源
 
 <img class="w-100 mt-4" border="rounded" src="../images/redis_github.png">
 
 ::right::
 
-### Redis创始人 Antirez
+### Salvatore Sanfilippo（ Antirez ）
 
 <img class="w-100 mt-4" border="rounded" src="../images/redis_antirez.png">
+<!--
+说起Redis，就不得不提到它的创始人 Salvatore Sanfilippo，他的网名叫 Antirez。他在意大利西西里岛长大，他的父亲是一家石化公司的电工，负责处理工业自动化问题。在 80 年代，他的父亲开始使用可编程逻辑控制器(PLC)，他对这些控制器的兴趣促使他购买了Z80处理器板并开始在其上编程。
+当 antirez 六岁时，他的家人得到了他们的第一台个人电脑，一台 TI99/4A。虽然它在商业上并不成功，但它是一台有趣的机器。他的父亲会在上面写一些 BASIC 程序，antirez 很快就效仿了，在他上一年级的时候就学会了打字和抄写 BASIC 程序。后来又自学了c语言。
+-->
+---
+layout: two-cols
+layoutClass: gap-8
 ---
 
-### why is redis so fast
+### Redis的历史
 
-<img class="w-100 mt-4" border="rounded" src="../images/redis_fast.png" alt="why-redis-so-fast">
+- 随着互联网的发展，数据量越来越大，传统的关系型数据库已经不能满足需求， 大佬们寻求一种新的技术，用于提升数据的读写性能。
+- antirez 认为使用内存可以解决这个问题，因此他用Tcl编程语言编写了一个内存数据库的原型。命名为LMDB（Redis 的前身）。源代码只有 300 多行，但已经支持支持两种数据类型：字符串和列表和SET、GET、LPUSH、RPUSH等基本命令。
+- 2009年，他意识到 Tcl 已经达到极限。于是他用 C 语言并开源，命名为 Redis（Remote Dictionary Server）。
+- 五年多来，Redis 为 LLOOGG 处理了 20 亿次页面浏览。2014 年站点关闭时，Redis 每秒处理 350-400 个命令。所有这些都在一台每月只需 150 美元的虚拟机上运行。
+
+::right::
+
+<img class="w-90" border="rounded" src="../images/web123.png">
+
+<img class="w-90" border="rounded" src="../images/redis_fast.png" alt="why-redis-so-fast">
+<!--
+2005 年是 Web 2.0 的曙光，他和他的朋友创立了一家名为Merzia的公司，旨在为意大利市场创建 Web 2.0 应用程序。
+几年后，antirez 和他的朋友决定专注于一个新领域：网络分析。他们的目标是为博主创建一个工具LLOOGG，使他们能够监控访问者的实时行为。
+起初，antirez 尝试使用 MySQL，但很快就遇到了性能问题。每次 MySQL 读取或写入数据时，它都必须访问硬盘驱动器。随着数据量的增长，操作成为硬盘读写速度的瓶颈，导致网站陷入停顿。
+antirez 认为使用内存可以解决这个问题，因此他用Tcl编程语言编写了一个内存数据库的原型。命名为LMDB（LLOOGG 内存数据库），这是 Redis 的前身。源代码只有 300 多行，已经支持SET、GET、LPUSH、RPUSH等基本命令。支持两种数据类型：字符串和列表。
+-->
+---
+
+### Redis的特点
+
+Redis的全称为Remote Dictionary Server，它是一种基于键值对的存储系统，为应用程序提供了快速、可靠的数据存取服务。
+- **数据模型丰富** 支持多种数据结构（字符串、哈希、列表、集合、有序集合等），可以满足不同场景下的数据存储需求。
+- **高性能** 将数据存储在内存中，读写操作都非常快速，可以达到上百万的QPS（每秒查询数）。
+- **持久化支持** 支持两种持久化，将内存中的数据以二进制形式保存到硬盘上
+- **主从复制** 可以将一台主节点的数据复制到多个从节点上，以提供数据的冗余备份和读写分离的支持。
+- **支持事务** 可以一次执行多个命令，保证这些命令都得到执行，或者都不执行。
+- **发布订阅功能** 可以实现消息的发布和订阅，对于消息队列等场景非常有用。
+- **支持集群** 可以将多个Redis节点组成一个集群，提供数据的高可用和横向扩展的支持。
 
 ---
 
@@ -29,6 +63,7 @@ layoutClass: gap-8
 ```
 - 安装Redis Cli 命令行 
 - 安装Redis Insight UI管理工具
+
 ---
 
 ### 数据类型
@@ -388,31 +423,120 @@ layoutClass: gap-8
 
 ---
 
-### Redis - 持久化
+### Redis - 缓存技术
 
-Redis 支持两种持久化方式：RDB 和 AOF。
+缓存是一种数据存储技术，用于存储应用程序中频繁访问的数据。在现在的互联网应用中，缓存技术是非常重要的。
 
-- **RDB** 是 Redis 数据库的默认持乯化方式，RDB 持久化是通过快照的方式来进行持久化的。
-- **AOF** 是 Redis 数据库的另一种持久化方式，AOF 持久化是通过保存 Redis 服务器所执行的写命令来记录数据库状态。
+>More than 10 years ago, Amazon found that every 100ms of latency cost them 1% in sales. In 2006, Google found an extra .5 seconds in search page generation time dropped traffic by 20%. A broker could lose $4 million in revenues per millisecond if their electronic trading platform is 5 milliseconds behind the competition. -- Quote: [amazon-found-every-100ms-of-latency-cost-them-1-in-sales](https://www.gigaspaces.com/blog/amazon-found-every-100ms-of-latency-cost-them-1-in-sales)
+
+
+<img class="w-100" border="rounded" src="../images/cache.png">
+
+**缓存命中**：当请求的数据在缓存中时，直接从缓存中获取数据，不需要访问数据库。
 
 ---
-layout: two-cols
-layoutClass: gap-8
+
+### Redis - 缓存淘汰
+
+内存是有限的。
+
+<v-clicks depths="2">
+
+- 给缓存内容设置一个超时时间，具体设置多长交给应用程序们去设置，过期了就删除。
+- 定期删除过期的缓存，比如每隔一段时间就扫描一遍，把过期的缓存删除掉。
+- 惰性删除，当缓存被访问时，检查缓存是否过期，过期了就删除。
+- 淘汰策略，根据一定的策略删除一些缓存。
+    - **noeviction** 返回错误，不会删除任何键值
+    - **allkeys-lru** 使用LRU算法删除最近最少使用的键值
+    - **volatile-lru** 使用LRU算法从设置了过期时间的键集合中删除最近最少使用的键值
+    - **allkeys-random** 从所有key随机删除
+    - **volatile-random** 从设置了过期时间的键的集合中随机删除
+    - **volatile-ttl** 从设置了过期时间的键中删除剩余时间最短的键
+    - **volatile-lfu** 从配置了过期时间的键中删除使用频率最少的键
+    - **allkeys-lfu** 从所有键中删除使用频率最少的键
+
+</v-clicks>
+<!--
+超时时间有了，我该在什么时候去干这个清理的活呢？
+最简单的就是定期删除，我决定100ms就做一次，一秒钟就是10次！要全面扫一遍的话花多久时间，会严重影响新请求的！随机选择一部分来清理，能缓解内存压力就行了。
+但是这样做会不会有问题呢？如果我有一个缓存，一直没有被访问，但是它的超时时间还没到，那么它就会一直存在，这样就会占用内存。
+-->
+
 ---
 
-### Redis - 缓存击穿
+### Redis - 缓存失败的现象和解决方案
 
+<v-clicks>
+
+- **缓存穿透** Penetration
+    - **使用布隆过滤器**，先通过布隆过滤器判断 key 是否存在，如果 key 不存在，直接返回，如果 key 存在，再访问数据库，并将查询结果回写到缓存。
+- **缓存击穿** Breakdown
+    - **设置热点数据永不过期**，这样就不会出现缓存击穿的情况。
+- **缓存雪崩** Avalanche/Thundering Herd
+    - **设置不同的过期时间**，避免缓存集中过期。
+    - **分布式缓存**，将缓存分布到多个节点上，避免单点故障。
+</v-clicks>
+<!--
+访问一个不存在的 key，导致请求直接访问数据库，数据库无法承受如此大的请求量。
 缓存击穿是指一个 key 非常热点，在 key 过期的瞬间，有大量的请求同时访问这个 key，这个时候，这个 key 失效，请求会穿透缓存直接访问数据库，导致数据库压力过大。
-
-- **设置热点数据永不过期**，这样就不会出现缓存击穿的情况。
-- **使用布隆过滤器**，在缓存失效时，先通过布隆过滤器判断 key 是否存在，如果 key 不存在，直接返回，如果 key 存在，再访问数据库，并将查询结果回写到缓存。
-
-::right::
-
-### Redis - 缓存雪崩
-
 缓存雪崩是指在某一个时间段，缓存集中过期失效。
 缓存雪崩通常是由于缓存服务器宕机、缓存并发量剧增、缓存的 key 设置了相同的过期时间等情况导致。
+-->
+---
+layout: image
+image: ../images/blue.png
+---
 
-- **设置不同的过期时间**，避免缓存集中过期。
+### 如何应对
 
+---
+
+### Redis - 持久化
+
+<v-clicks depths="2">
+
+- **RDB** Redis Database Backup
+    - 类似于snapshot
+    - 将所有数据以二进制的格式写成一个RDB文件
+    - 数据量大，不适合频繁做
+- **AOF** Append Only File
+    - 类似于Mysql的binlog（二进制日志）
+    - 通过保存 Redis 服务器所执行的 ~~读命令~~ 写命令 (INSERT，UPDATE、DELETE等)来记录数据库历史状态
+    - 读取AOF文件，重放日志，恢复数据
+
+</v-clicks>
+
+---
+
+AOF 文件会不断增大，为了避免文件过大，Redis 提供了 AOF 重写机制。
+
+<img class="w-100" border="rounded" src="../images/aof_rewrite.png"> 
+
+```bash
+RPUSH name_list '编程技术宇宙'
+RPUSH name_list '帅地玩编程'
+RPUSH name_list '后端技术学堂'
+```
+
+可以合并成一条搞定：
+
+```bash
+RPUSH name_list '编程技术宇宙' '帅地玩编程' '后端技术学堂'
+```
+
+来源于：[编程技术宇宙](https://www.cnblogs.com/xuanyuan/p/13689484.html)
+
+---
+
+AOF缓冲区及重写缓冲区
+
+- **AOF缓冲区**：Redis 会先将命令写入到 AOF 缓冲区，然后再将 AOF 缓冲区的内容写入到 AOF 文件。
+- **AOF重写缓冲区**：AOF 重写缓冲区对应的是一个新的缓冲区，用于存储重写期间的写命令。
+
+<img class="w-100" border="rounded" src="../images/aof_buf.png">
+
+<!--
+我在之前的aof_buf之外，又准备了一个缓冲区：AOF重写缓冲区。
+从创建重写子进程开始的那一刻起，我把后面来的写入命令也copy一份写到这个重写缓冲区中，等到子进程重写AOF文件结束之后，我再把这个缓冲区中的命令写入到新的AOF文件中。
+最后再重命名新的AOF文件，替换掉原来的那个臃肿不堪的大文件，终于大功告成！
+-->

@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 const props = defineProps({
+  label: {
+    default: "",
+  },
   count: {
     default: 0,
   },
-})
+});
 
-const counter = ref(props.count)
+const counter = ref(props.count);
 </script>
 
 <template>
   <div flex="~" w="min" border="~ main rounded-md">
+    <span p="2" font="mono" text="center">{{ props.label }}:</span>
     <button
       border="r main"
       p="2"
