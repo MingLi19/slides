@@ -45,8 +45,7 @@ hideInToc: true
 
 # 课程大纲
 
-<Toc minDepth="1" maxDepth="2"></Toc>
-
+<Toc minDepth="1" maxDepth="2" columns="3"></Toc>
 
 ---
 layout: center
@@ -85,13 +84,3 @@ layout: center
 ---
 src: ./pages/neo4j.md
 ---
-
----
-layout: center
----
-
-# 列数据库 - Hbase
----
-src: ./pages/hbase.md
----
-
