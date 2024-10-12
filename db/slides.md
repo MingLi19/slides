@@ -84,3 +84,12 @@ layout: center
 ---
 src: ./pages/neo4j.md
 ---
+
+---
+layout: center
+---
+
+# 列数据库 - HBase
+---
+src: ./pages/hbase.md
+---

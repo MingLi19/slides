@@ -229,7 +229,7 @@ DELETE是删除操作，表示删除查询到的节点。
 -->
 ---
 
-### 建立图模型
+### 建立图
 
 ```cypher
 // 创建用户和物品节点
@@ -249,9 +249,7 @@ CREATE (u3)-[:Publish]->(i2)
 
 ---
 
-### 图模型展示
-
-查询功能
+### 图查询
 
 ```cypher
 // 查询Bob正在租借的物品
@@ -263,5 +261,3 @@ MATCH (u:User {name: 'Alice'})-[*2]->(i:User) RETURN i
 // 查询Alice的朋友的朋友发布的物品
 MATCH (u:User {name: 'Alice'})-[*2]-(f:User)-[:Publish]->(i:Item) RETURN i
 ```
-
----
