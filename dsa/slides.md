@@ -4,7 +4,7 @@ background: https://cover.sli.dev
 title: 海洋大数据技术
 class: text-center
 drawings:
-  persist: false
+    persist: false
 transition: slide-left
 codeCopy: true
 mdc: true
@@ -132,6 +132,20 @@ layout: center
 ---
 
 # 栈 Stack
+
+---
+src: ./pages/stack.md
+---
+
+---
+layout: center
+---
+
+# 队列 Queue
+
+---
+src: ./pages/queue.md
+---
 
 ---
 
