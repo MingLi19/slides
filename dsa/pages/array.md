@@ -123,6 +123,7 @@ print(pos)
 如果我们希望扩容数组，则需重新建立一个更大的数组，然后把原数组元素依次复制到新数组。这是一个 O(n) 的操作，在数组很大的情况下非常耗时。
 
 下面是底层是怎么实现的，扩容操作都位于`Objects/listobject.c`中。
+
 ```c {*}{maxHeight:'400px'}
 static int
 list_resize(PyListObject *self, Py_ssize_t newsize)

@@ -56,16 +56,16 @@ class ArrayStack:
         """判断栈是否为空"""
         pass
 
+    def peek(self) -> int:
+        """访问栈顶元素"""
+        pass
+
     def push(self, val: int):
         """入栈"""
         pass
 
     def pop(self) -> int:
         """出栈"""
-        pass
-
-    def peek(self) -> int:
-        """访问栈顶元素"""
         pass
 ```
 ```py
@@ -80,6 +80,11 @@ class ArrayStack:
     def is_empty(self) -> bool:
         return self.size() == 0
 
+    def peek(self) -> int:
+        if self.is_empty():
+            raise IndexError("栈为空")
+        return self._data[-1]
+
     def push(self, val: int):
         self._data.append(val)
 
@@ -87,11 +92,6 @@ class ArrayStack:
         if self.is_empty():
             raise IndexError("栈为空")
         return self._data.pop()
-
-    def peek(self) -> int:
-        if self.is_empty():
-            raise IndexError("栈为空")
-        return self._data[-1]
 ```
 ````
 
@@ -135,16 +135,16 @@ class LinkedListStack:
         """判断栈是否为空"""
         pass
 
+    def peek(self) -> int:
+        """访问栈顶元素"""
+        pass
+
     def push(self, val: int):
         """入栈"""
         pass
 
     def pop(self) -> int:
         """出栈"""
-        pass
-
-    def peek(self) -> int:
-        """访问栈顶元素"""
         pass
 ```
 ```py
@@ -160,6 +160,11 @@ class LinkedListStack:
     def is_empty(self) -> bool:
         return self._size == 0
 
+    def peek(self) -> int:
+        if self.is_empty():
+            raise IndexError("栈为空")
+        return self._peek.val
+
     def push(self, val: int):
         node = ListNode(val)
         node.next = self._peek
@@ -171,11 +176,6 @@ class LinkedListStack:
         self._peek = self._peek.next
         self._size -= 1
         return num
-
-    def peek(self) -> int:
-        if self.is_empty():
-            raise IndexError("栈为空")
-        return self._peek.val
 ```
 ````
 

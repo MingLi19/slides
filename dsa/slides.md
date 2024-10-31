@@ -1,7 +1,7 @@
 ---
 theme: seriph
 background: https://cover.sli.dev
-title: 海洋大数据技术
+title: 数据结构
 class: text-center
 drawings:
     persist: false
@@ -42,6 +42,28 @@ h1 {
 </style>
 ---
 hideInToc: true
+layout: two-cols
+layoutClass: gap-4
+---
+
+## 自我介绍
+
+个人经历
+- 本科 - 郑州大学 - 计算机专业
+- 硕士 - 马格德堡大学 - 计算机专业
+
+工作内容
+- 数字化
+
+::right::
+
+<img class="w-100" src="./images/job.png">
+
+<!--
+学业，工作，数字化
+-->
+---
+hideInToc: true
 ---
 
 # 课程大纲
@@ -64,9 +86,82 @@ layout: center
 - 各步骤都有确定的含义，在相同的输入和运行条件下，输出始终相同。
 
 算法无处不在:
-广义上算法是解决问题的思路和方法，比如查字典，打牌，零钱找零等。
-狭义上算法是计算机科学的核心。例如，搜索引擎的搜索算法、社交网络的推荐算法、电商平台的推荐算法等。
+- 广义上算法是解决问题的思路和方法。
+- 狭义上算法是计算机科学的核心。
+<!--
+在计算机问世之前，算法和数据结构就已经存在于世界的各个角落。例如，数学家们通过算法解决了很多数学问题，工程师们通过算法设计了很多建筑和机械。算法和数据结构是人类智慧的结晶，是人类文明的重要组成部分。
+-->
+---
 
+### 算法举例 - 查字典
+
+<div v-click="5"
+  class="text-3xl absolute text-[#2B90B6] -z-1"
+  v-motion
+  :initial="{ x: 0, y: -50, opacity: 0}"
+  :enter="{ x: 400, y: -50, opacity: 1, transition: { duration: 1000 } }">
+    二分查找算法
+</div>
+
+在字典里，每个汉字都对应一个拼音，而字典是按照拼音字母顺序排列的。假设我们需要查找一个拼音首字母为 `R` 的字，通常会按照下面的方式实现:
+1. 翻开字典约一半的页数，查看该页的首字母是什么，假设首字母为 `M`。
+2. 由于在拼音字母表中 `R` 位于 `M` 之后，所以排除字典前半部分，查找范围缩小到后半部分。
+3. 不断重复步骤 1. 和步骤 2. ，直至找到拼音首字母为 `R` 的页码为止。
+
+<v-switch>
+    <template #0> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_1.png"> </template>
+    <template #1> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_2.png"> </template>
+    <template #2> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_3.png"> </template>
+    <template #3> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_4.png"> </template>
+    <template #4> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_5.png"> </template>
+    <template #5> <img class="w-130 mx-auto" border="rounded" src="./images/example/bs_5.png"> </template>
+</v-switch>
+<!--
+从数据结构的角度，我们可以把字典视为一个已排序的“数组”；从算法的角度，我们可以将上述查字典的一系列操作看作“二分查找”
+-->
+---
+
+### 算法举例 - 整理扑克
+
+<div v-click="5"
+  class="text-3xl absolute text-[#2B90B6] -z-1"
+  v-motion
+  :initial="{ x: 0, y: -50, opacity: 0}"
+  :enter="{ x: 400, y: -50, opacity: 1, transition: { duration: 1000 } }">
+    插入排序
+</div>
+
+在打牌时，每局都需要整理手中的扑克牌，使其从小到大排列，实现流程:
+1. 将扑克牌划分为“有序”和“无序”两部分，并假设初始状态下最左 1 张扑克牌已经有序。
+2. 在无序部分抽出一张扑克牌，插入至有序部分的正确位置；完成后最左 2 张扑克已经有序。
+3. 不断循环步骤 <2> ，每一轮将一张扑克牌从无序部分插入至有序部分，直至所有扑克牌都有序。
+
+<img class="w-130 mx-auto" border="rounded" src="./images/example/insert_sort.png">
+<!--
+插入排序处理小型数据集时非常高效。许多编程语言的排序库函数中都有插入排序的身影。
+-->
+---
+
+### 算法举例 - 货币找零
+
+<div v-click="5"
+  class="text-3xl absolute text-[#2B90B6] -z-1"
+  v-motion
+  :initial="{ x: 0, y: -50, opacity: 0}"
+  :enter="{ x: 400, y: -50, opacity: 1, transition: { duration: 1000 } }">
+    贪心算法
+</div>
+
+假设我们在超市购买了 `69` 元的商品，给了收银员 `100` 元，则收银员需要找我们 `31` 元。他会很自然地完成如下的思考:
+1. 可选项是比 `31` 元面值更小的货币，包括 `20` 元、`10` 元、`5` 元、`1` 元。 
+2. 优先使用面额最大的货币找零，即 20 元。
+3. 从剩余可选项中继续选择面额最大的货币找零，直至找零完毕。
+4. 最终找零结果为 `20` 元 + `10` 元 + `1` 元。
+
+<img class="w-130 mx-auto" border="rounded" src="./images/example/greedy.png">
+<!--
+插入排序处理小型数据集时非常高效。许多编程语言的排序库函数中都有插入排序的身影。
+-->
 ---
 
 ## 数据结构
@@ -148,81 +243,12 @@ src: ./pages/queue.md
 ---
 
 ---
+layout: center
+---
 
-```python {1-2|3-4}
-class List:
+# 二分查找 Binary Search
 
-    def __init__(self):
-        """构造方法"""
-        self._capacity: int = 10  # 列表容量
-        self._arr: list[int] = [0] * self._capacity  # 数组（存储列表元素）
-        self._size: int = 0  # 列表长度（当前元素数量）
-        self._extend_ratio: int = 2  # 每次列表扩容的倍数
+---
+src: ./pages/binary_search.md
+---
 
-    def size(self) -> int:
-        """获取列表长度（当前元素数量）"""
-        return self._size
-
-    def capacity(self) -> int:
-        """获取列表容量"""
-        return self._capacity
-
-    def get(self, index: int) -> int:
-        """访问元素"""
-        # 索引如果越界，则抛出异常，下同
-        if index < 0 or index >= self._size:
-            raise IndexError("索引越界")
-        return self._arr[index]
-
-    def set(self, num: int, index: int):
-        """更新元素"""
-        if index < 0 or index >= self._size:
-            raise IndexError("索引越界")
-        self._arr[index] = num
-
-    def add(self, num: int):
-        """在尾部添加元素"""
-        # 元素数量超出容量时，触发扩容机制
-        if self.size() == self.capacity():
-            self.extend_capacity()
-        self._arr[self._size] = num
-        self._size += 1
-
-    def insert(self, num: int, index: int):
-        """在中间插入元素"""
-        if index < 0 or index >= self._size:
-            raise IndexError("索引越界")
-        # 元素数量超出容量时，触发扩容机制
-        if self._size == self.capacity():
-            self.extend_capacity()
-        # 将索引 index 以及之后的元素都向后移动一位
-        for j in range(self._size - 1, index - 1, -1):
-            self._arr[j + 1] = self._arr[j]
-        self._arr[index] = num
-        # 更新元素数量
-        self._size += 1
-
-    def remove(self, index: int) -> int:
-        """删除元素"""
-        if index < 0 or index >= self._size:
-            raise IndexError("索引越界")
-        num = self._arr[index]
-        # 将索引 index 之后的元素都向前移动一位
-        for j in range(index, self._size - 1):
-            self._arr[j] = self._arr[j + 1]
-        # 更新元素数量
-        self._size -= 1
-        # 返回被删除的元素
-        return num
-
-    def extend_capacity(self):
-        """列表扩容"""
-        # 新建一个长度为原数组 _extend_ratio 倍的新数组，并将原数组复制到新数组
-        self._arr = self._arr + [0] * self.capacity() * (self._extend_ratio - 1)
-        # 更新列表容量
-        self._capacity = len(self._arr)
-
-    def to_array(self) -> list[int]:
-        """返回有效长度的列表"""
-        return self._arr[: self._size]
-```
