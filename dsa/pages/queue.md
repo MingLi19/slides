@@ -262,17 +262,11 @@ class LinkedListQueue:
 
 Python 中的 `collections` 模块提供了 `deque` 类，它是一个双向队列的实现。
 
-
----
-
-## Python Deque
-
 ```py
 from collections import deque
 
 # 初始化队列
 # 在 Python 中，我们一般将双向队列类 deque 当作队列使用
-# 虽然 queue.Queue() 是纯正的队列类，但不太好用，因此不推荐
 que: deque[int] = deque()
 
 # 元素入队
@@ -366,7 +360,7 @@ class Browser:
 
 #### 实现LRU缓存
 
-LRU 缓存是一种常见的缓存策略，它会删除最近最少使用的元素。我们可以使用双向队列和哈希表来实现 LRU 缓存。
+LRU 缓存是一种常见的缓存策略，它会删除最近最少使用的元素。使用 `deque` 和 `dict` 来实现 LRU 缓存。
 
 ```py {*}{maxHeight: '450px'}
 from collections import deque

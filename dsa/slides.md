@@ -110,6 +110,16 @@ src: ./pages/queue.md
 layout: center
 ---
 
+# 哈希表 Hash Table
+
+---
+src: ./pages/hashmap.md
+---
+
+---
+layout: center
+---
+
 # 二分查找 Binary Search
 
 ---

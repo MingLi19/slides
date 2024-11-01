@@ -4,7 +4,7 @@
 
 >给定一个长度为 n 的数组 nums ，元素按从小到大的顺序排列且不重复。请查找并返回元素 target 在该数组中的索引。若数组不包含该元素，则返回 -1。示例如图 10-1 所示。
 
-<img class="w-130 mx-auto" border="rounded" src="../images/binary_search.png">
+<img class="w-130 mx-auto" border="rounded" src="../images/bs/binary_search.png">
 
 ---
 
@@ -17,13 +17,13 @@
     4. 若数组不包含目标元素，搜索区间最终会缩小为空。此时返回 -1。
 
 <v-switch>
-    <template #0> <img class="w-130 mx-auto" border="rounded" src="../images/bs_1.png"> </template>
-    <template #1> <img class="w-130 mx-auto" border="rounded" src="../images/bs_2.png"> </template>
-    <template #2> <img class="w-130 mx-auto" border="rounded" src="../images/bs_3.png"> </template>
-    <template #3> <img class="w-130 mx-auto" border="rounded" src="../images/bs_4.png"> </template>
-    <template #4> <img class="w-130 mx-auto" border="rounded" src="../images/bs_5.png"> </template>
-    <template #5> <img class="w-130 mx-auto" border="rounded" src="../images/bs_6.png"> </template>
-    <template #6> <img class="w-130 mx-auto" border="rounded" src="../images/bs_7.png"> </template>
+    <template #0> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_1.png"> </template>
+    <template #1> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_2.png"> </template>
+    <template #2> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_3.png"> </template>
+    <template #3> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_4.png"> </template>
+    <template #4> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_5.png"> </template>
+    <template #5> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_6.png"> </template>
+    <template #6> <img class="w-130 mx-auto" border="rounded" src="../images/bs/bs_7.png"> </template>
 </v-switch>
 
 <style>
@@ -38,5 +38,61 @@ li {
 
 ## 代码实现
 
+<br>
 
-值得注意的是，由于 `i` 和 `j` 都是 `int` 类型，因此 `m` 可能会超出 `int` 类型的取值范围。为了避免大数越界，我们通常采用公式 $\bigl \lfloor i + (j - i)/2 \bigr \rfloor$ 来计算中点。
+```py
+def binary_search(nums: list[int], target: int) -> int:
+    """二分查找（双闭区间）"""
+    # 初始化双闭区间 [0, n-1] ，即 i, j 分别指向数组首元素、尾元素
+    i, j = 0, len(nums) - 1
+    # 循环，当搜索区间为空时跳出（当 i > j 时为空）
+    while i <= j:
+        # 理论上 Python 的数字可以无限大（取决于内存大小），无须考虑大数越界问题
+        m = (i + j) // 2  # 计算中点索引 m
+        if nums[m] < target:
+            i = m + 1  # 此情况说明 target 在区间 [m+1, j] 中
+        elif nums[m] > target:
+            j = m - 1  # 此情况说明 target 在区间 [i, m-1] 中
+        else:
+            return m  # 找到目标元素，返回其索引
+    return -1  # 未找到目标元素，返回 -1
+```
+
+- 时间复杂度为 `O(logn)` : 在二分循环中，区间每轮缩小一半，因此循环次数为 $\log ^2(n)$ 。
+- 空间复杂度为 `O(1)` : 指针 `i` 和 `j` 仅使用常数大小空间。
+
+PS: 由于 `i` 和 `j` 都是 `int` 类型，因此 `m` 可能会超出 `int` 类型的取值范围。为了避免大数越界，我们通常采用公式 $\bigl \lfloor i + (j - i)/2 \bigr \rfloor$ 来计算中点。
+
+---
+
+## 优点与局限性
+
+二分查找在时间和空间方面都有较好的性能。
+- 二分查找的时间效率高。在大数据量下，对数阶的时间复杂度具有显著优势。例如，当数据大小 $n = 2^{20}$ 时，线性查找需要 $2^{20} = 1048576$ 轮循环，而二分查找仅需 $\log ^2(n) = 20$ 轮循环。
+- 二分查找无须额外空间。相较于需要借助额外空间的搜索算法（例如哈希查找），二分查找更加节省空间。
+
+然而，二分查找并非适用于所有情况，主要有以下原因。
+- 二分查找仅适用于有序数据。若输入数据无序，为了使用二分查找而专门进行排序，得不偿失。因为排序算法的时间复杂度通常为 $O(n \log n)$ ，比线性查找和二分查找都更高。对于频繁插入元素的场景，为保持数组有序性，需要将元素插入到特定位置，时间复杂度为 $O(n)$ ，也是非常昂贵的。
+- 二分查找仅适用于数组。二分查找需要跳跃式（非连续地）访问元素，而在链表中执行跳跃式访问的效率较低，因此不适合应用在链表或基于链表实现的数据结构。
+- 小数据量下，线性查找性能更佳。在线性查找中，每轮只需 1 次判断操作；而在二分查找中，需要 1 次加法、1 次除法、1 ~ 3 次判断操作、1 次加法（减法），共 4 ~ 6 个单元操作；因此，当数据量 n 较小时，线性查找反而比二分查找更快。
+
+---
+
+## 其他查找算法
+
+给定大小为 `n` 的一组数据，我们可以使用线性搜索、二分查找、树查找、哈希查找等多种方法从中搜索目标元素。
+
+<img class="w-130 mx-auto" border="rounded" src="../images/bs/search_compare.png">
+
+---
+
+## 算法对比
+
+| 操作 | 线性搜索 |	二分查找 | 树查找 |	哈希查找 |
+| --- | --- | --- | --- | --- |
+| 查找元素 | $O(n)$ |	$O(\log n)$ |	$O(\log n)$ |	$O(1)$ |
+| 插入元素 | $O(1)$ |	$O(n)$ |	$O(\log n)$ |	$O(1)$ |
+| 删除元素 | $O(n)$ |	$O(n)$ |	$O(\log n)$ |	$O(1)$ |
+| 额外空间 | $O(1)$ |	$O(1)$ | $O(n)$ |	$O(n)$ |
+| 数据预处理 | / | 排序 $O(\log n) |	构建树 $O(n \log n)$ |	构建哈希表 $O(n)$ |
+| 数据是否有序 | 无序	| 有序 | 有序 |	无序
