@@ -42,44 +42,25 @@ h1 {
 </style>
 ---
 hideInToc: true
-layout: two-cols
-layoutClass: gap-4
 ---
 
-## 自我介绍
+# 课程大纲
 
-<br>
-<v-clicks>
+<Toc minDepth="1" maxDepth="2" columns="4"></Toc>
 
+<!--
 - 二十岁前没出过省
 - 十年旅德，没在家过年
 - 一份中国学历，一份德国学历
 - 一半德国工作经验，一半中国工作经验
 - 十年磨一剑 **数字化**
-</v-clicks>
-
-::right::
-
-[领英](https://www.linkedin.com/in/ming-li-714a88105)
-
-<img class="w-90" src="./images/intro/job.png">
-
-<!--
 学业和工作都是中外都经历过，对于数据结构和算法有着深刻的理解和实践。希望通过这门课程，能够帮助大家更好地理解数据结构和算法。
 -->
----
-hideInToc: true
----
-
-# 课程大纲
-
-<Toc minDepth="1" maxDepth="2" columns="3"></Toc>
-
 ---
 layout: center
 ---
 
-# 数据结构和算法之个人见解
+# 数据结构和算法
 
 ---
 src: ./pages/intro.md

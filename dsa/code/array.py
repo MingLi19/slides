@@ -1,12 +1,11 @@
-import numpy as np
+a = [1, 2]
+b = [2, 1]
+c = a
 
-a = [1, 2, 3]
-b = np.array([1, 2, 3])
+print(1 == 1)
 
-print(type(a))
-print(type(a[0]))
-print(a)
+print(a[0] == b[1])
 
-print(type(b))
-print(type(b[1]))
-print(b)
+print(id(a) == id(c))
+
+print(id(a[0]) == id(b[1]))

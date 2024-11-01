@@ -148,19 +148,13 @@ layout: center
 
 ---
 
-### 共同的语言 - DS&A
+## 共同的语言 - DS&A
 
 <img class="w-100 mx-auto" border="rounded" src="../images/intro/practitioner.png">
 
----
-layout: two-cols
-layoutClass: gap-4
----
-
+<!-- 
 <img class="w-100" border="rounded" src="../images/intro/salary_1.png">
-
 数据来源: [金十数据](https://xnews.jin10.com/details/110194)
-
 ::right::
-
-<img class="w-100" border="rounded" src="../images/intro/salary_1.png">
+<img class="w-100" border="rounded" src="../images/intro/salary_2.png"> 
+-->
