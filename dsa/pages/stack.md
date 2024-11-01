@@ -1,12 +1,12 @@
 ## 定义
 
-栈（stack）是一种遵循先入后出逻辑的线性数据结构。
+栈 `stack` 是一种遵循先入后出逻辑的线性数据结构。
 
 我们可以将栈类比为桌面上的一摞盘子，如果想取出底部的盘子，则需要先将上面的盘子依次移走。我们将盘子替换为各种类型的元素（如整数、字符、对象等），就得到了栈这种数据结构。
 
-如图所示，我们把堆叠元素的顶部称为“栈顶”，底部称为“栈底”。将把元素添加到栈顶的操作叫作“入栈”，删除栈顶元素的操作叫作“出栈”。
+如图所示，我们把堆叠元素的顶部称为`Head 栈顶`，底部称为`Tail 栈底`。将把元素添加到栈顶的操作叫作 `Push 入栈`，删除栈顶元素的操作叫作 `Pop 出栈`。
 
-<img class="w-100" border="rounded" src="../images/stack.png">
+<img class="w-100 mx-auto" border="rounded" src="../images/stack/stack.png">
 
 <!-- 
 羽毛球盒子、书本堆、餐盘堆等都是栈的实例，它们都遵循先入后出的原则。栈的应用非常广泛，例如函数调用栈、表达式求值、括号匹配等。
@@ -33,9 +33,9 @@
 使用数组实现栈时，我们可以将数组的尾部作为栈顶。如图所示，入栈与出栈操作分别对应在数组尾部添加元素与删除元素，时间复杂度都为 `O(1)` 。
 
 <v-switch>
-  <template #0> <img class="w-100" border="rounded" src="../images/stack_array_1.png"> </template>
-  <template #1> <img v-click="1" class="w-100" border="rounded" src="../images/stack_array_2.png"> </template>
-  <template #2> <img v-click="2" class="w-100" border="rounded" src="../images/stack_array_3.png"> </template>
+  <template #0> <img class="w-140 mx-auto" border="rounded" src="../images/stack/stack_array_1.png"> </template>
+  <template #1> <img v-click="1" class="w-140 mx-auto" border="rounded" src="../images/stack/stack_array_2.png"> </template>
+  <template #2> <img v-click="2" class="w-140 mx-auto" border="rounded" src="../images/stack/stack_array_3.png"> </template>
 </v-switch>
 
 ---
@@ -104,9 +104,9 @@ class ArrayStack:
 如图所示，对于入栈操作，我们只需将元素插入链表头部，这种节点插入方法被称为“头插法”。而对于出栈操作，只需将头节点从链表中删除即可。
 
 <v-switch>
-  <template #0> <img class="w-100" border="rounded" src="../images/stac_linkedlist_1.png"> </template>
-  <template #1> <img v-click="1" class="w-100" border="rounded" src="../images/stack_linkedlist_2.png"> </template>
-  <template #2> <img v-click="2" class="w-100" border="rounded" src="../images/stack_linkedlist_3.png"> </template>
+  <template #0> <img class="w-140 mx-auto" border="rounded" src="../images/stack/stack_linkedlist_1.png"> </template>
+  <template #1> <img class="w-140 mx-auto" border="rounded" src="../images/stack/stack_linkedlist_2.png"> </template>
+  <template #2> <img class="w-140 mx-auto" border="rounded" src="../images/stack/stack_linkedlist_3.png"> </template>
 </v-switch>
 
 ---
@@ -185,7 +185,7 @@ class LinkedListStack:
 
 |  | 基于数组 | 基于链表 |
 | --- | --- | --- |
-| 支持操作 | 入栈、出栈、访问栈顶元素，随机访问 | 入栈、出栈、访问栈顶元素 |
+| 支持操作 | 入栈、出栈、访问栈顶元素，~~随机访问~~ | 入栈、出栈、访问栈顶元素 |
 | 时间复杂度 | 入栈、出栈、访问栈顶元素: `O(1)`，扩容: `O(n)` | 入栈、出栈、访问栈顶元素: `O(1)` |
 | 空间复杂度 | 预分配内存，可能存在空间浪费 | 链表节点占用额外空间 |
 

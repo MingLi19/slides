@@ -1,10 +1,10 @@
 ## 定义
 
-队列（queue）是一种遵循先入先出规则的线性数据结构。顾名思义，队列模拟了排队现象，即新来的人不断加入队列尾部，而位于队列头部的人逐个离开。
+队列 `Queue` 是一种遵循先入先出规则的线性数据结构。顾名思义，队列模拟了排队现象，即新来的人不断加入队列尾部，而位于队列头部的人逐个离开。
 
-如图所示，我们将队列头部称为“队首”，尾部称为“队尾”，将把元素加入队尾的操作称为“入队”，删除队首元素的操作称为“出队”。
+如图所示，我们将队列头部称为 `Head 队首`，尾部称为 `Tail 队尾`，将把元素加入队尾的操作称为 `Push 入队` 或者 `Enqueue`，删除队首元素的操作称为 `Popleft 出队` 或者 `Dequeue`。
 
-<img class="w-100" border="rounded" src="../images/queue.png">
+<img class="w-140 mx-auto" border="rounded" src="../images/queue/queue.png">
 
 ----
 
@@ -17,36 +17,6 @@
 | peek() | 访问队首元素 | O(1) |
 | size() | 获取队列的长度 | O(1) |
 | is_empty() | 判断队列是否为空 | O(1) |
-
----
-
-## Python 官方实现
-
-```py
-from collections import deque
-
-# 初始化队列
-# 在 Python 中，我们一般将双向队列类 deque 当作队列使用
-# 虽然 queue.Queue() 是纯正的队列类，但不太好用，因此不推荐
-que: deque[int] = deque()
-
-# 元素入队
-que.append(1)
-que.append(3)
-que.append(2)
-
-# 访问队首元素
-front: int = que[0]
-
-# 元素出队
-pop: int = que.popleft()
-
-# 获取队列的长度
-size: int = len(que)
-
-# 判断队列是否为空
-is_empty: bool = len(que) == 0
-```
 
 ---
 
@@ -63,9 +33,9 @@ is_empty: bool = len(que) == 0
 可以看到，入队和出队操作都只需进行一次操作，时间复杂度均为 `O(1)` 。
 
 <v-switch>
-  <template #0> <img class="w-100" border="rounded" src="../images/queue_array_1.png"> </template>
-  <template #1> <img v-click="1" class="w-100" border="rounded" src="../images/queue_array_2.png"> </template>
-  <template #2> <img v-click="2" class="w-100" border="rounded" src="../images/queue_array_3.png"> </template>
+  <template #0> <img class="w-100 mx-auto" border="rounded" src="../images/queue/queue_array_1.png"> </template>
+  <template #1> <img class="w-100 mx-auto" border="rounded" src="../images/queue/queue_array_2.png"> </template>
+  <template #2> <img class="w-100 mx-auto" border="rounded" src="../images/queue/queue_array_3.png"> </template>
 </v-switch>
 
 ---
@@ -127,8 +97,8 @@ class ArrayQueue:
 ```
 ```py
 class ArrayQueue:
-
     # ...
+
     def push(self, num: int):
         """入队"""
         if self._size == self.capacity():
@@ -163,9 +133,9 @@ class ArrayQueue:
 使用链表实现队列时，我们可以将链表的“头节点”和“尾节点”分别视为“队首”和“队尾”，规定队尾仅可添加节点，队首仅可删除节点。
 
 <v-switch>
-  <template #0> <img class="w-100" border="rounded" src="../images/queue_linked_1.png"> </template>
-  <template #1> <img v-click="1" class="w-100" border="rounded" src="../images/queue_linked_2.png"> </template>
-  <template #2> <img v-click="2" class="w-100" border="rounded" src="../images/queue_linked_3.png"> </template>
+  <template #0> <img class="w-140 mx-auto" border="rounded" src="../images/queue/queue_linkedlist_1.png"> </template>
+  <template #1> <img class="w-140 mx-auto" border="rounded" src="../images/queue/queue_linkedlist_2.png"> </template>
+  <template #2> <img class="w-140 mx-auto" border="rounded" src="../images/queue/queue_linkedlist_3.png"> </template>
 </v-switch>
 
 ---
@@ -282,73 +252,45 @@ class LinkedListQueue:
 
 在队列中，我们仅能删除头部元素或在尾部添加元素。
 
-双向队列（double-ended queue）提供了更高的灵活性，允许在头部和尾部执行元素的添加或删除操作。
+双向队列 `double-ended queue` 提供了更高的灵活性，允许在头部和尾部执行元素的添加或删除操作。
 
-<img class="w-100" border="rounded" src="../images/deque.png">
+<img class="w-140 mx-auto" border="rounded" src="../images/queue/deque.png">
 
 ---
 
-## Python 官方实现
+## Python Deque
 
 Python 中的 `collections` 模块提供了 `deque` 类，它是一个双向队列的实现。
 
-```py {*}{maxHeight: '450px'}
+
+---
+
+## Python Deque
+
+```py
 from collections import deque
 
-# 初始化双向队列
-d = deque('ghi')              
-
-# 元素遍历
-for elem in d:                  
-    print(elem.upper())
-# G
-# H
-# I
-
-print(list(d))
-# ['g', 'h', 'i']
+# 初始化队列
+# 在 Python 中，我们一般将双向队列类 deque 当作队列使用
+# 虽然 queue.Queue() 是纯正的队列类，但不太好用，因此不推荐
+que: deque[int] = deque()
 
 # 元素入队
-d.append('j')
-d.append('k')
-
-# 元素出队
-leftmost = d.popleft()                    # return and remove the leftmost item
-rightmost = d.pop()                        # return and remove the rightmost item
-print(leftmost, rightmost)
-# g k
-
-# 获取队列的长度
-size: int = len(d)
-print(size)
-# 3
-
-# 判断队列是否为空
-is_empty: bool = len(d) == 0
+que.append(1)
+que.append(3)
+que.append(2)
 
 # 访问队首元素
-front: int = d[0]
-print(front)
-# h
+front: int = que[0]
 
-# 访问队尾元素
-rear: int = d[-1]
-print(rear)
-# j
+# 元素出队
+pop: int = que.popleft()
 
-# 反转队列
-d.reverse()
-print(list(d))
-# ['j', 'i', 'h']
+# 获取队列的长度
+size: int = len(que)
 
-# 旋转队列
-d.rotate(1)                            # right rotation
-print(list(d))
-# ['h', 'j', 'i']
-d.rotate(-1)                           # left rotation
-print(list(d))
-# ['j', 'i', 'h']
-
+# 判断队列是否为空
+is_empty: bool = len(que) == 0
 ```
 
 ---
@@ -356,9 +298,9 @@ layout: two-cols
 layoutClass: gap-4
 ---
 
-<img class="w-100" border="rounded" src="../images/deque_operator_1.png">
+<img class="w-100" border="rounded" src="../images/queue/deque_operator_1.png">
 ::right::
-<img class="w-100" border="rounded" src="../images/deque_operator_2.png">
+<img class="w-100" border="rounded" src="../images/queue/deque_operator_2.png">
 
 ---
 
@@ -375,4 +317,79 @@ layoutClass: gap-4
 
 双向队列兼具栈与队列的逻辑，因此它可以实现这两者的所有应用场景，同时提供更高的自由度。
 
+<!--
 例如，软件的“撤销”功能通常使用栈来实现：系统将每次更改操作 `push` 到栈中，然后通过 `pop` 实现撤销。然而，考虑到系统资源的限制，软件通常会限制撤销的步数（例如仅允许保存 `50` 步）。当栈的长度超过 `50`时，软件需要在栈底（队首）执行删除操作。但栈无法实现该功能，此时就需要使用双向队列来替代栈。请注意，“撤销”的核心逻辑仍然遵循栈的先入后出原则，只是双向队列能够更加灵活地实现一些额外逻辑。
+-->
+---
+layout: image
+
+# the image source
+image: ../images/kent.png
+
+backgroundSize: contain
+---
+
+---
+
+#### 实现一个浏览器的“前进”和“后退”功能
+
+```py {*}{maxHeight: '450px'}
+from collections import deque
+
+class Browser:
+    def __init__(self):
+        self._back = deque()
+        self._forward = deque()
+        self._current = None
+    
+    def visit(self, url: str):
+        self._back.append(self._current)
+        self._current = url
+        self._forward.clear()
+    
+    def back(self) -> str:
+        if not self._back:
+            return self._current
+        self._forward.append(self._current)
+        self._current = self._back.pop()
+        return self._current
+
+    def forward(self) -> str:
+        if not self._forward:
+            return self._current
+        self._back.append(self._current)
+        self._current = self._forward.pop()
+        return self._current
+```
+
+---
+
+#### 实现LRU缓存
+
+LRU 缓存是一种常见的缓存策略，它会删除最近最少使用的元素。我们可以使用双向队列和哈希表来实现 LRU 缓存。
+
+```py {*}{maxHeight: '450px'}
+from collections import deque
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self._capacity = capacity
+        self._cache = dict()
+        self._queue = deque()
+    
+    def get(self, key: int) -> int:
+        if key not in self._cache:
+            return -1
+        self._queue.remove(key)
+        self._queue.append(key)
+        return self._cache[key]
+    
+    def put(self, key: int, value: int):
+        if key in self._cache:
+            self._queue.remove(key)
+        elif len(self._cache) == self._capacity:
+            oldest = self._queue.popleft()
+            self._cache.pop(oldest)
+        self._cache[key] = value
+        self._queue.append(key)
+```

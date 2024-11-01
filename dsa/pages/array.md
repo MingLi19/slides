@@ -130,7 +130,7 @@ The growth pattern is: 0, 4, 8, 16, 25, 35, 46, 58, 72, 88, ...
 
 ---
 
-## List 操作集合
+## List APIs
 
 <br>
 
@@ -158,7 +158,7 @@ list.clear()
 
 ---
 
-### Python List 操作集合
+### Python List APIs
 
 <br>
 

@@ -46,7 +46,7 @@ hideInToc: true
 
 # 课程大纲
 
-<Toc minDepth="1" maxDepth="2" columns="4"></Toc>
+<Toc minDepth="1" maxDepth="2" columns="4" listClass="text-sm"></Toc>
 
 <!--
 - 二十岁前没出过省
