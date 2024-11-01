@@ -96,3 +96,103 @@ PS: 由于 `i` 和 `j` 都是 `int` 类型，因此 `m` 可能会超出 `int` �
 | 额外空间 | $O(1)$ |	$O(1)$ | $O(n)$ |	$O(n)$ |
 | 数据预处理 | / | 排序 $O(\log n) |	构建树 $O(n \log n)$ |	构建哈希表 $O(n)$ |
 | 数据是否有序 | 无序	| 有序 | 有序 |	无序
+
+---
+layout: two-cols
+layoutClass: gap-4
+---
+
+## 最后一题
+
+LeetCode 001. [两数之和](https://leetcode-cn.com/problems/two-sum/)
+> 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。你可以按任意顺序返回答案。
+
+提示：
+- `2 <= nums.length <= 104`
+- `-109 <= nums[i] <= 109`
+- `-109 <= target <= 109`
+- **只会存在一个有效答案**
+
+::right::
+
+- 示例 1：
+    - 输入：nums = [2,7,11,15], target = 9
+    - 输出：[0,1]
+    - 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+- 示例 2：
+    - 输入：nums = [3,2,4], target = 6
+    - 输出：[1,2]
+- 示例 3：
+    - 输入：nums = [3,3], target = 6
+    - 输出：[0,1]
+
+
+<style>
+li {
+    font-size: 20px;
+}
+</style>
+
+---
+
+### 解题思路 - 线性查找
+
+**以时间换空间**
+
+考虑直接遍历所有可能的组合。如图所示，我们开启一个两层循环，在每轮中判断两个整数的和是否为 `target` ，若是，则返回它们的索引。
+
+<img class="w-130 mx-auto" border="rounded" src="../images/bs/time.png">
+
+---
+
+### 代码实现 - 线性查找
+
+<br>
+
+```py
+def two_sum_brute_force(nums: list[int], target: int) -> list[int]:
+    """方法一：暴力枚举"""
+    # 两层循环，时间复杂度为 O(n^2)
+    for i in range(len(nums) - 1):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return []
+```
+
+此方法的时间复杂度为 `O(n^2)` ，空间复杂度为 `O(1)` 。在大数据量下非常耗时。
+
+---
+
+### 解题思路 - 哈希查找
+
+**以空间换时间**
+
+借助一个哈希表，键值对分别为数组元素和元素索引。循环遍历数组，每轮执行图所示的步骤:
+1. 判断数字 `target - nums[i]` 是否在哈希表中，若是，则直接返回这两个元素的索引。
+2. 将键值对 `nums[i]` 和索引 `i` 添加进哈希表。
+
+<v-switch>
+    <template #0> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_1.png"> </template>
+    <template #1> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_2.png"> </template>
+    <template #2> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_3.png"> </template>
+</v-switch>
+
+---
+
+### 代码实现 - 哈希查找
+
+<br>
+
+```py
+def two_sum_hash_table(nums: list[int], target: int) -> list[int]:
+    """方法二：辅助哈希表"""
+    # 辅助哈希表，空间复杂度为 O(n)
+    dic = {}
+    # 单层循环，时间复杂度为 O(n)
+    for i in range(len(nums)):
+        if target - nums[i] in dic:
+            return [dic[target - nums[i]], i]
+        dic[nums[i]] = i
+    return []
+```

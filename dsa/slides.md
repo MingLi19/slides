@@ -126,3 +126,8 @@ layout: center
 src: ./pages/binary_search.md
 ---
 
+---
+layout: center
+---
+
+# Q & A

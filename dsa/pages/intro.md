@@ -1,12 +1,5 @@
----
-layout: center
----
 
-## 算法举例
-
----
-
-### 算法举例 - 查字典
+## 算法举例 
 
 <div v-click="5"
   class="text-3xl absolute text-[#2B90B6] -z-1"
