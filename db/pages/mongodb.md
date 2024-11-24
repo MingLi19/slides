@@ -69,7 +69,7 @@ layoutClass: gap-4
 
 ### 传统数据库的功能
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - 强大的查询能力
   - 不亚于SQL语句的表达能力 - 各种操作符 & 聚合操作
@@ -92,7 +92,7 @@ layoutClass: gap-4
 
 ### NoSQL的附加能力
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - 灵活数据结构
   - 单个集合中的文档不必具有相同的字段集
@@ -156,7 +156,7 @@ layout: two-cols
 layoutClass: gap-4
 ---
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - 创建集合
   - db.createCollection()
@@ -175,7 +175,7 @@ layoutClass: gap-4
 
 ::right::
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - 查询文档
   - db.collection.find()

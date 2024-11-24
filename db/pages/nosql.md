@@ -57,7 +57,7 @@ layoutClass: gap-4
 
 ## ACID
 <br>  
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - **A** (Atomicity：原子性)
   - 事务被视为不可分割的单元, 要么全部执行成功, 要么全部失败。
@@ -84,7 +84,7 @@ I: 比如现在有个交易是从A账户转100元至B账户, 在这个交易还�
 ### I - 事务并发问题
 ❗❗❗数据不一致
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - **脏读 (Dirty Read)**：
   - 一个事务读取到了另一个事务未提交的数据。

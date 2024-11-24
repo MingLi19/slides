@@ -172,7 +172,7 @@ Avro 数据序列化
 
 ### HBase - 数据模型
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - **Row Key** 行键唯一标识, 最大长度64kb
     - 访问方式: 单个行键, 行键区间, 全表扫描

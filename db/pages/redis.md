@@ -456,7 +456,7 @@ layoutClass: gap-8
 
 内存是有限的。
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - 给缓存内容设置一个超时时间，具体设置多长交给应用程序们去设置，过期了就删除。
 - 定期删除过期的缓存，比如每隔一段时间就扫描一遍，把过期的缓存删除掉。
@@ -511,7 +511,7 @@ image: ../images/blue.png
 
 ### 持久化
 
-<v-clicks depths="2">
+<v-clicks depth="2">
 
 - **RDB** Redis Database Backup
     - 类似于snapshot
