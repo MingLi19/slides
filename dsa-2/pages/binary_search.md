@@ -1,10 +1,10 @@
-## 问题描述
+## 算法定义
 
 二分查找 `binary search` 是一种基于分治策略 `divide and conquer` 的高效搜索算法。它利用数据的有序性，每轮缩小一半搜索范围，直至找到目标元素或搜索区间为空为止。
 
->给定一个长度为 n 的数组 nums ，元素按从小到大的顺序排列且不重复。请查找并返回元素 target 在该数组中的索引。若数组不包含该元素，则返回 -1。示例如图 10-1 所示。
+>给定一个长度为 n 的数组 nums ，元素按从小到大的顺序排列且不重复。请查找并返回元素 target 在该数组中的索引。若数组不包含该元素，则返回 -1。示例如图所示。
 
-<img class="w-130 mx-auto" border="rounded" src="../images/bs/binary_search.png">
+<img class="w-150 mx-auto" border="rounded" src="../images/bs/binary_search.png">
 
 ---
 
@@ -36,7 +36,7 @@ li {
 -->
 ---
 
-```py {*|2-4|5-6|7-8|9-14|15|*}
+```py {*|3-4|5-6|7-8|9-14|15|*}
 def binary_search(nums: list[int], target: int) -> int:
     """二分查找（双闭区间）"""
     # 初始化双闭区间 [0, n-1] ，即 i, j 分别指向数组首元素、尾元素
@@ -54,10 +54,17 @@ def binary_search(nums: list[int], target: int) -> int:
     return -1  # 未找到目标元素，返回 -1
 ```
 
-- 时间复杂度为 `O(logn)` : 在二分循环中，区间每轮缩小一半，因此循环次数为 $\log ^2(n)$ 。
-- 空间复杂度为 `O(1)` : 指针 `i` 和 `j` 仅使用常数大小空间。
+<div v-click='6'>
 
-PS: 在某些语言中，由于 `i` 和 `j` 都是整型数字类型，因此 `m` 可能会超出类型的取值范围。为了避免大数越界，我们通常采用公式 $\bigl \lfloor i + (j - i)/2 \bigr \rfloor$ 来计算中点。
+- 时间复杂度为 $O(\log n)$ : 在二分循环中，区间每轮缩小一半，因此循环次数为 $\log ^2(n)$ 。
+- 空间复杂度为 $O(1)$ : 指针 `i` 和 `j` 仅使用常数大小空间。
+
+</div>
+
+<div v-click='7'>
+
+PS: 在某些语言中，由于 `i` 和 `j` 都是整型数字类型，因此 `m` 可能会超出类型的取值范围。为了避免大数越界，我们通常采用公式 $m = \bigl \lfloor i + (j - i)/2 \bigr \rfloor$ 来计算中点。
+</div>
 ---
 
 ## 优点与局限性
@@ -84,22 +91,20 @@ li {
 -->
 ---
 
-## 其他查找算法
+## 查找算法对比
 
 给定大小为 `n` 的一组数据，我们可以使用线性搜索、二分查找、树查找、哈希查找等多种方法从中搜索目标元素。
 
-<img class="w-150 mx-auto" border="rounded" src="../images/bs/search_compare.png">
+<img class="w-190 mx-auto" border="rounded" src="../images/bs/search_compare.png">
 
 ---
-
-## 算法对比
 
 | 操作 | 线性搜索(数组) |	二分查找(有序数组) | 树查找(二叉树) |	哈希查找(哈希表) |
 | --- | --- | --- | --- | --- |
 | 查找元素 | $O(n)$ |	$O(\log n)$ |	$O(\log n)$ |	$O(1)$ |
-| 插入元素 | $O(1)$ |	$O(n)$ |	$O(\log n)$ |	$O(1)$ |
-| 删除元素 | $O(n)$ |	$O(n)$ |	$O(\log n)$ |	$O(1)$ |
-| 额外空间 | $O(1)$ |	$O(1)$ | $O(n)$ |	$O(n)$ |
+| 插入元素 | $O(1)$ |	$O(n)$      |	$O(\log n)$ |	$O(1)$ |
+| 删除元素 | $O(n)$ |	$O(n)$      |	$O(\log n)$ |	$O(1)$ |
+| 额外空间 | $O(1)$ |	$O(1)$      |    $O(n)$     |	$O(n)$ |
 | 数据预处理 | / | 排序 $O( \log n)$ |	构建树 $O(n \log n)$ |	构建哈希表 $O(n)$ |
 | 数据是否有序 | 无序	| 有序 | 有序 |	无序
 
@@ -108,7 +113,7 @@ layout: two-cols
 layoutClass: gap-4
 ---
 
-## Coding Challenge
+## Codiing Challenge
 
 LeetCode 001. [两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。你可以按任意顺序返回答案。
@@ -122,15 +127,15 @@ LeetCode 001. [两数之和](https://leetcode-cn.com/problems/two-sum/)
 ::right::
 
 - 示例 1：
-    - 输入：nums = [2,7,11,15], target = 9
-    - 输出：[0,1]
-    - 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+    - 输入：`nums = [2,7,11,15]`, `target = 9`
+    - 输出：`[0,1]`
+    - 解释：因为 `nums[0] + nums[1] == 9` ，返回 `[0, 1]` 。
 - 示例 2：
-    - 输入：nums = [3,2,4], target = 6
-    - 输出：[1,2]
+    - 输入：`nums = [3,2,4]`, `target = 6`
+    - 输出：`[1,2]`
 - 示例 3：
-    - 输入：nums = [3,3], target = 6
-    - 输出：[0,1]
+    - 输入：`nums = [3,3]`, `target = 6`
+    - 输出：`[0,1]`
 
 
 <style>
@@ -141,17 +146,15 @@ li {
 
 ---
 
-### 解题思路 - 线性查找
-
-**以时间换空间**
+### 思路1 - 线性查找 - 暴力穷举
 
 考虑直接遍历所有可能的组合。如图所示，我们开启一个两层循环，在每轮中判断两个整数的和是否为 `target` ，若是，则返回它们的索引。
 
-<img class="w-150 mx-auto" border="rounded" src="../images/bs/time.png">
+<img class="w-180 mx-auto" border="rounded" src="../images/bs/time.png">
 
 ---
 
-### 代码实现 - 线性查找
+### 思路1 - 代码实现 - 以时间换空间
 
 <br>
 
@@ -170,23 +173,21 @@ def two_sum_brute_force(nums: list[int], target: int) -> list[int]:
 
 ---
 
-### 解题思路 - 哈希查找
-
-**以空间换时间**
+### 思路2 - 哈希查找 - 哈希表
 
 借助一个哈希表，键值对分别为数组元素和元素索引。循环遍历数组，每轮执行图所示的步骤:
 1. 判断数字 `target - nums[i]` 是否在哈希表中，若是，则直接返回这两个元素的索引。
 2. 将键值对 `nums[i]` 和索引 `i` 添加进哈希表。
 
 <v-switch>
-    <template #0> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_1.png"> </template>
-    <template #1> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_2.png"> </template>
-    <template #2> <img class="w-130 mx-auto" border="rounded" src="../images/bs/space_3.png"> </template>
+    <template #0> <img class="w-160 mx-auto" border="rounded" src="../images/bs/space_1.png"> </template>
+    <template #1> <img class="w-160 mx-auto" border="rounded" src="../images/bs/space_2.png"> </template>
+    <template #2> <img class="w-160 mx-auto" border="rounded" src="../images/bs/space_3.png"> </template>
 </v-switch>
 
 ---
 
-### 代码实现 - 哈希查找
+### 思路2 - 代码实现 - 以空间换时间
 
 <br>
 
@@ -202,3 +203,5 @@ def two_sum_hash_table(nums: list[int], target: int) -> list[int]:
         hash_table[nums[i]] = i
     return []
 ```
+
+此方法的时间复杂度为 $O(n)$ ，空间复杂度为 $O(n)$ 。在大数据量下具有较好的性能。

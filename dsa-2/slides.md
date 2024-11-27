@@ -14,7 +14,7 @@ lineNumbers: true
 
 # 数据结构
 
-上海海事大学 - 2024.11
+上海海事大学 - 2024.11.30
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -52,7 +52,7 @@ hideInToc: true
 layout: center
 ---
 
-# 二分查找 Binary Search
+# 二分查找
 
 ---
 src: ./pages/binary_search.md

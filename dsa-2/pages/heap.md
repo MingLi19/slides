@@ -362,31 +362,55 @@ def sift_down(self, i: int):
 4. 遍历完成后，堆中保存的就是最大的 k 个元素。
 
 <v-switch>
-<template #1>
-<img class="w-110 mx-auto" src="../images/heap/topk31.png" />
-</template>
-<template #2>
-<img class="w-110 mx-auto" src="../images/heap/topk32.png" />
-</template>
-<template #3>
-<img class="w-110 mx-auto" src="../images/heap/topk33.png" />
-</template>
-<template #4>
-<img class="w-110 mx-auto" src="../images/heap/topk34.png" />
-</template>
-<template #5>
-<img class="w-110 mx-auto" src="../images/heap/topk35.png" />
-</template>
-<template #6>
-<img class="w-110 mx-auto" src="../images/heap/topk36.png" />
-</template>
-<template #7>
-<img class="w-110 mx-auto" src="../images/heap/topk37.png" />
-</template>
-<template #8>
-<img class="w-110 mx-auto" src="../images/heap/topk38.png" />
-</template>
-<template #9>
-<img class="w-110 mx-auto" src="../images/heap/topk39.png" />
-</template>
+  <template #1>
+    <img class="w-110 mx-auto" src="../images/heap/topk31.png" />
+  </template>
+  <template #2>
+    <img class="w-110 mx-auto" src="../images/heap/topk32.png" />
+  </template>
+  <template #3>
+    <img class="w-110 mx-auto" src="../images/heap/topk33.png" />
+  </template>
+  <template #4>
+    <img class="w-110 mx-auto" src="../images/heap/topk34.png" />
+  </template>
+  <template #5>
+    <img class="w-110 mx-auto" src="../images/heap/topk35.png" />
+  </template>
+  <template #6>
+    <img class="w-110 mx-auto" src="../images/heap/topk36.png" />
+  </template>
+  <template #7>
+    <img class="w-110 mx-auto" src="../images/heap/topk37.png" />
+  </template>
+  <template #8>
+    <img class="w-110 mx-auto" src="../images/heap/topk38.png" />
+  </template>
+  <template #9>
+    <img class="w-110 mx-auto" src="../images/heap/topk39.png" />
+  </template>
 </v-switch>
+
+---
+  
+```py
+def top_k_heap(nums: list[int], k: int) -> list[int]:
+    """基于堆查找数组中最大的 k 个元素"""
+    # 初始化小顶堆
+    heap = []
+    # 将数组的前 k 个元素入堆
+    for i in range(k):
+        heapq.heappush(heap, nums[i])
+    # 从第 k+1 个元素开始，保持堆的长度为 k
+    for i in range(k, len(nums)):
+        # 若当前元素大于堆顶元素，则将堆顶元素出堆、当前元素入堆
+        if nums[i] > heap[0]:
+            heapq.heappop(heap)
+            heapq.heappush(heap, nums[i])
+    return heap
+```
+
+
+总共执行了 n 轮入堆和出堆，堆的最大长度为 k ，因此时间复杂度为 $O(n \log k)$ 。该方法的效率很高，当 k 较小时，时间复杂度趋向 $O(n)$ 。当 k 较大时，时间复杂度不会超过 $O(n \log n)$ 。
+
+另外，该方法适用于动态数据流的使用场景。在不断加入数据时，我们可以持续维护堆内的元素，从而实现最大的 k 个元素的动态更新。
