@@ -72,16 +72,6 @@ src: ./pages/sorting.md
 layout: center
 ---
 
-# 分治算法
-
----
-src: ./pages/divide_and_conquer.md
----
-
----
-layout: center
----
-
 # 动态规划
 
 ---
@@ -96,6 +86,16 @@ layout: center
 
 ---
 src: ./pages/tree.md
+---
+
+---
+layout: center
+---
+
+# 堆 Heap
+
+---
+src: ./pages/heap.md
 ---
 
 ---
