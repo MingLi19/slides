@@ -52,7 +52,7 @@ hideInToc: true
 layout: center
 ---
 
-# 二分查找
+# 二分查找 Binary Search
 
 ---
 src: ./pages/binary_search.md
@@ -62,7 +62,7 @@ src: ./pages/binary_search.md
 layout: center
 ---
 
-# 排序算法
+# 排序算法 Sorting
 
 ---
 src: ./pages/sorting.md
@@ -72,7 +72,7 @@ src: ./pages/sorting.md
 layout: center
 ---
 
-# 树
+# 树 Tree
 
 ---
 src: ./pages/tree.md
