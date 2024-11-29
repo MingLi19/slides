@@ -1,6 +1,6 @@
 ## 二叉树
 
-二叉树 `Binary Tree` 是一种非线性数据结构，代表“祖先”与“后代”之间的派生关系，体现了“一分为二”的分治逻辑`Dive and Conquer`。与 `Linked List`类似，二叉树的基本单元是节点，每个节点包含值、左子节点引用和右子节点引用。
+二叉树 `Binary Tree` 是一种非线性数据结构。与 `Linked List`类似，二叉树的基本单元是节点，每个节点包含值、左子节点引用和右子节点引用。
 
 ```py
 class TreeNode:
@@ -14,27 +14,28 @@ class TreeNode:
 <img class="w-120 mx-auto" border="rounded" src="../images/tree/binary_tree.png">
 
 <!--
+上下左右两个维度的引用关系，使得二叉树的结构更加灵活，可以应用于更复杂的场景。
 每个节点都有两个引用（指针），分别指向左子节点（left-child node）和右子节点（right-child node），该节点被称为这两个子节点的父节点（parent node）。当给定一个二叉树的节点时，我们将该节点的左子节点及其以下节点形成的树称为该节点的左子树（left subtree），同理可得右子树（right subtree）。
 -->
 
 ---
 
-## 常见术语
+### 常见术语
 
 <br>
 
 - **根节点（root node）** 位于二叉树顶层的节点，没有父节点。
-- **叶节点（leaf node）** 没有子节点的节点，其两个指针均指向 None 。
+- **叶节点（leaf node）** 没有子节点的节点，其两个指针均指向 `None` 。
 - **边（edge）** 连接两个节点的线段，即节点引用（指针）。
-- **节点所在的层（level）** 从顶至底递增，根节点所在层为 1 。
-- **节点的度（degree）** 节点的子节点的数量。在二叉树中，度的取值范围是 0、1、2 。
+- **节点所在的层（level）** 从顶至底递增，根节点所在层为 `1` 。
+- **节点的度（degree）** 节点的子节点的数量。在二叉树中，度的取值范围是 `0、1、2` 。
 - **二叉树的高度（height）** 从根节点到最远叶节点所经过的边的数量。
 - **节点的深度（depth）** 从根节点到该节点所经过的边的数量。
 - **节点的高度（height）** 从距离该节点最远的叶节点到该节点所经过的边的数量。
 
 ---
 
-## 初始化二叉树
+### 初始化二叉树
 
 <br>
 
@@ -43,7 +44,7 @@ class TreeNode:
 
 <br>
 
-```py {1-7|8-12}
+```py {*|-7|8-|*}
 # 初始化二叉树
 # 初始化节点
 n1 = TreeNode(val=1)
@@ -60,7 +61,7 @@ n2.right = n5
 
 ---
 
-## 插入与删除节点
+### 插入与删除节点
 
 <br>
 
@@ -77,39 +78,41 @@ n1.left = n2
 <img class="w-130 mx-auto" border="rounded" src="../images/tree/bt_insert.png">
 
 ---
-
 layout: two-cols
 layoutClass: gap-2
-
 ---
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/perfect_bt.png">
+<img class="w-110 mx-auto" border="rounded" src="../images/tree/perfect_bt.png">
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/full_bt.png">
+<img class="w-110 mx-auto" border="rounded" src="../images/tree/full_bt.png">
 
 ::right::
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/complete_bt.png">
+<img class="w-110 mx-auto" border="rounded" src="../images/tree/complete_bt.png">
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/balanced_bt.png">
+<img class="w-110 mx-auto" border="rounded" src="../images/tree/balanced_bt.png">
 <!--
  所有层的节点都被完全填满。在完美二叉树中，叶节点的度为 0 ，其余所有节点的度都为 2 ；若树的高度为 h ，则节点总数为  $2^{h+1} - 1$ ，呈现标准的指数级关系，反映了自然界中常见的细胞分裂现象。
  只有最底层的节点未被填满，且最底层节点尽量靠左填充。请注意，完美二叉树也是一棵完全二叉树。
 -->
 ---
 
-## 二叉树的退化
+### 二叉树的退化
 
-展示了二叉树的理想结构与退化结构。当二叉树的每层节点都被填满时，达到“完美二叉树”；而当所有节点都偏向一侧时，二叉树退化为“链表”。
+下图展示了二叉树的理想结构与退化结构。
+
+- 当二叉树的每层节点都被填满时，达到“完美二叉树”
+- 当所有节点都偏向一侧时，二叉树退化为“链表”。
+
+<img class="w-120 mx-auto" border="rounded" src="../images/tree/degenerate.png">
 
 - 完美二叉树是理想情况，可以充分发挥二叉树“分治”的优势。
 - 链表则是另一个极端，各项操作都变为线性操作，时间复杂度退化至 `O(n)`
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/degenerate.png">
 
 ---
 
-## 二叉树的最佳结构与最差结构
+### 二叉树的最佳结构与最差结构
 
 在最佳结构和最差结构下，二叉树的叶节点数量、节点总数、高度等达到极大值或极小值。
 
@@ -128,18 +131,22 @@ layoutClass: gap-2
 
 二叉树常见的遍历方式包括
 
+<v-clicks>
+
 - 层序遍历 `level-order traversal`
 - 前序遍历 `pre-order traversal`
 - 中序遍历 `in-order traversal`
 - 后序遍历 `post-order traversal`
 
+</v-clicks>
+
 ---
 
-## 层序遍历
+### 层序遍历
 
-广度优先遍历通常借助“队列”来实现。队列遵循 <span v-mark.red>先进先出</span> 的规则，而广度优先遍历则遵循 <span v-mark.red>逐层推进</span> 的规则，两者背后的思想是一致的。
+广度优先遍历通常借助“队列”来实现。队列遵循<span v-mark.red>先进先出</span>的规则，而广度优先遍历则遵循<span v-mark.red>逐层推进</span>的规则，两者背后的思想是一致的。
 
-```py {*|1-5|6-7|8-16}
+```py {*|-5|6-7|8-16|*}
 def level_order(root: TreeNode | None) -> list[int]:
     """层序遍历"""
     # 初始化队列，加入根节点
@@ -160,15 +167,15 @@ def level_order(root: TreeNode | None) -> list[int]:
 
 ---
 
-## 前序、中序、后序遍历
+### 前序、中序、后序遍历
 
-相应地，前序、中序和后序遍历都属于深度优先遍历 `depth-first traversal`，也称深度优先搜索`depth-first search` 或 `DFS`。 它体现了一种 <span v-mark.red>先走到尽头，再回溯继续</span> 的遍历方式。
+相应地，前序、中序和后序遍历都属于深度优先遍历 `depth-first traversal`，也称深度优先搜索`depth-first search` 或 `DFS`。 它体现了一种<span v-mark.red>先走到尽头，再回溯继续</span>的遍历方式。
 
-<img class="w-150 mx-auto" border="rounded" src="../images/tree/dfs.png">
+<img class="w-180 mx-auto" border="rounded" src="../images/tree/dfs.png">
 
 ---
 
-```py {1-8|10-17|19-26}
+```py {-8|10-17|19-}
 def pre_order(root: TreeNode | None):
     """前序遍历"""
     if root is None:
@@ -201,27 +208,26 @@ def post_order(root: TreeNode | None):
 
 ## 二叉树数组表示
 
-如何将二叉树表示为数组？给定一棵完美二叉树，我们将所有节点按照层序遍历的顺序存储在一个数组中，则每个节点都对应唯一的数组索引。
+如何将二叉树表示为数组? 给定一棵完美二叉树，我们将所有节点按照层序遍历的顺序存储在一个数组中，则每个节点都对应唯一的数组索引。
 
-根据层序遍历的特性，我们可以推导出父节点索引与子节点索引之间的 <span v-mark.red>映射公式</span>：若某节点的索引为 `i`, 则该节点的左子节点索引为 `2*i+1`, 右子节点索引为 `2*i+2`。
+根据层序遍历的特性，我们可以推导出父节点索引与子节点索引之间的<span v-mark.red>映射公式</span>：若某节点的索引为 `i`, 则该节点的左子节点索引为 $2*i+1$, 右子节点索引为 $2*i+2$。
 
-<img class="w-140 mx-auto" border="rounded" src="../images/tree/array.png">
+<img class="w-150 mx-auto" border="rounded" src="../images/tree/array.png">
 
 <!--
 映射公式的角色相当于链表中的节点引用（指针）。给定数组中的任意一个节点，我们都可以通过映射公式来访问它的左（右）子节点。
 -->
 
 ---
-
 layout: two-cols
-layoutClass: gap-2
-
+layoutClass: gap-4
 ---
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/without_none.png">
 
+- 数组表示
+
 ```py
-# 层序遍历的数组表示
 tree = [1, 2, 3, 4, 6, 7, 8, 9, 12, 15]
 ```
 
@@ -229,14 +235,15 @@ tree = [1, 2, 3, 4, 6, 7, 8, 9, 12, 15]
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/with_none.png">
 
+- 使用 `None` 来表示空位
+
 ```py
-# 使用 None 来表示空位
 tree = [1, 2, 3, 4, None, 6, 7, 8, 9, None, None, 12, None, None, 15]
 ```
 
 ---
 
-## 完全二叉树的数组表示
+### 完全二叉树的数组表示
 
 完全二叉树非常适合使用数组来表示。回顾完全二叉树的定义，`None` 只出现在最底层且靠右的位置，因此所有 None 一定出现在层序遍历序列的末尾。这意味着使用数组表示完全二叉树时，可以省略存储所有 `None`。
 
@@ -247,6 +254,10 @@ tree = [1, 2, 3, 4, None, 6, 7, 8, 9, None, None, 12, None, None, 15]
 ````md magic-move
 ```py
 class ArrayBinaryTree:
+    def __init__(self, arr: list[int | None]):
+        """构造方法"""
+        pass
+
     def size(self):
         """列表容量"""
         pass
@@ -306,35 +317,40 @@ class ArrayBinaryTree:
 -->
 
 ---
-
 layout: two-cols
 layoutClass: gap-4
-
 ---
 
 ````md magic-move
 ```py
     def level_order(self) -> list[int]:
-        """层序遍历"""
+        """
+        层序遍历
+        利用队列(数组)实现
+        """
         pass
 
     def dfs(self, i: int, order: str):
-        """深度优先遍历"""
+        """
+        深度优先遍历
+        利用递归实现
+        """
         pass
 ```
 
 ```py
     def level_order(self) -> list[int]:
         """层序遍历"""
-        self.res = []
+        queue = []
         # 直接遍历数组
         for i in range(self.size()):
             if self.val(i) is not None:
-                self.res.append(self.val(i))
-        return self.res
+                queue.append(self.val(i))
+        return queue
 
     def dfs(self, i: int, order: str):
         """深度优先遍历"""
+        self.res = []
         if self.val(i) is None:
             return
         # 前序遍历
@@ -391,39 +407,41 @@ layoutClass: gap-4
 
 ---
 
-## 二叉树总结
+### 二叉树数组表示的优缺点
 
-二叉树的数组表示主要有以下优点。
+<br>
 
-- 数组存储在连续的内存空间中，对缓存友好，访问与遍历速度较快。
-- 不需要存储指针，比较节省空间。
-- 允许随机访问节点。
+<v-clicks depth="2">
 
-然而，数组表示也存在一些局限性。
+- 二叉树的数组表示主要有以下优点。
+    - 数组存储在连续的内存空间中，对缓存友好，访问与遍历速度较快。
+    - 不需要存储指针，比较节省空间。
+    - 允许随机访问节点。
+- 然而，数组表示也存在一些局限性。
+    - 数组存储需要连续内存空间，因此不适合存储数据量过大的树。
+    - 增删节点需要通过数组插入与删除操作实现，效率较低。
+    - 当二叉树中存在大量 `None` 时，数组中包含的节点数据比重较低，空间利用率较低。
+</v-clicks>
 
-- 数组存储需要连续内存空间，因此不适合存储数据量过大的树。
-- 增删节点需要通过数组插入与删除操作实现，效率较低。
-- 当二叉树中存在大量 `None` 时，数组中包含的节点数据比重较低，空间利用率较低。
 
 ---
 
 ## 二叉搜索树
 
-二叉搜索树（binary search tree）满足以下条件:
+二叉搜索树 `binary search tree` 满足以下条件:
 
 1. 对于根节点，`左子树中所有节点的值` < `根节点的值` < `右子树中所有节点的值`。
 2. 任意节点的左、右子树也是二叉搜索树，即同样满足条件 `1.` 。
 
-<img class="w-150 mx-auto" border="rounded" src="../images/tree/bst.png">
+<img class="w-160 mx-auto" border="rounded" src="../images/tree/bst.png">
 
 ---
 
-## 搜索操作
+### 搜索操作
 
 我们将二叉搜索树封装为一个类 `BinarySearchTree` ，并声明一个成员变量 `root` ，指向树的根节点。
 
-1. 查找节点
-   给定目标节点值 `num` ，可以根据二叉搜索树的性质来查找。如图所示，我们声明一个节点 `cur` ，从二叉树的根节点 `root` 出发，循环比较节点值 `cur.val` 和 `num` 之间的大小关系。
+1. **查找节点** 声明一个节点 `cur` ，从二叉树的根节点 `root` 出发，循环比较节点值 `cur.val` 和 目标 `num` 之间的大小关系。
 
 - 若 `cur.val < num` ，则目标节点位于 `cur` 的右子树，更新 `cur = cur.right` 。
 - 若 `cur.val > num` ，则目标节点位于 `cur` 的左子树，更新 `cur = cur.left` 。
@@ -431,18 +449,24 @@ layoutClass: gap-4
 
 <v-switch>
   <template #1> 
-        <img class="w-110 mx-auto" border="rounded" src="../images/tree/search-tree/search1.png">
+        <img class="w-120 mx-auto" border="rounded" src="../images/tree/search-tree/search1.png">
     </template>
     <template #2>
-        <img class="w-110 mx-auto" border="rounded" src="../images/tree/search-tree/search2.png">
+        <img class="w-120 mx-auto" border="rounded" src="../images/tree/search-tree/search2.png">
     </template>
     <template #3>
-        <img class="w-110 mx-auto" border="rounded" src="../images/tree/search-tree/search3.png">
+        <img class="w-120 mx-auto" border="rounded" src="../images/tree/search-tree/search3.png">
     </template>
     <template #4>
-        <img class="w-110 mx-auto" border="rounded" src="../images/tree/search-tree/search4.png">
+        <img class="w-120 mx-auto" border="rounded" src="../images/tree/search-tree/search4.png">
     </template>
 </v-switch>
+
+<style>
+li {
+        font-size: 16px;
+}
+</style>
 
 ---
 
@@ -468,9 +492,9 @@ def search(self, num: int) -> TreeNode | None:
 
 ---
 
-## 插入节点
+### 插入节点
 
-给定一个待插入元素 `num` ，为了保持二叉搜索树“左子树 < 根节点 < 右子树”的性质，插入操作流程如图所示。
+给定一个待插入元素 `num` ，为了保持二叉搜索树 `左子树 < 根节点 < 右子树` 的性质，插入操作流程如图所示。
 
 1. 查找插入位置：与查找操作相似，从根节点出发，根据当前节点值和 num 的大小关系循环向下搜索，直到越过叶节点（遍历至 `None` ）时跳出循环。
 2. 在该位置插入节点：初始化节点 `num` ，将该节点置于 `None` 的位置。
@@ -478,8 +502,11 @@ def search(self, num: int) -> TreeNode | None:
 <img class="w-140 mx-auto" border="rounded" src="../images/tree/search-tree/insert.png">
 
 ---
+layout: two-cols
+layoutClass: gap-4
+---
 
-```py
+```py {*|2-5|6-18|19-|*}
 def insert(self, num: int):
     # 若树为空，则初始化根节点
     if self._root is None:
@@ -506,24 +533,24 @@ def insert(self, num: int):
         pre.left = node
 ```
 
+::right::
+
+<v-clicks>
+
 - 二叉搜索树不允许存在重复节点。因此，若待插入节点在树中已存在，则不执行插入，直接返回。
 - 借助节点 `pre` 保存上一轮循环的节点。这样在遍历至 `None` 时，可以获取到其父节点完成节点插入操作。
-
-<style>
-li {
-        font-size: 16px;
-}
-</style>
+- 插入节点操作的时间复杂度为 $O(\log n)$ ，与查找操作相同。
+</v-clicks>
 
 ---
 
-## 删除节点
+### 删除节点
 
-先在二叉树中查找到目标节点，再将其删除。与插入节点类似，我们需要保证在删除操作完成后，二叉搜索树的“左子树 < 根节点 < 右子树”的性质仍然满足。因此，我们根据目标节点的子节点数量，分 0、1 和 2 三种情况，执行对应的删除节点操作。
+先在二叉树中查找到目标节点，再将其删除。与插入节点类似，我们需要保证在删除操作完成后，二叉搜索树的 `左子树 < 根节点 < 右子树` 的性质仍然满足。因此，我们根据目标节点的子节点数量，分 `0、1 和 2` 三种情况，执行对应的删除节点操作。
 
 1. 若目标节点为叶节点，则直接删除。
 2. 若目标节点只有一个子节点，则将其子节点替换目标节点。
-3. 若目标节点有两个子节点，由于要保持二叉搜索树“左子树 < 根节点 < 右子树”的性质, 则找到目标节点的中序遍历前驱或后继节点 (右子树的最小节点或左子树的最大节点)，将其值替换目标节点的值。
+3. 若目标节点有两个子节点，由于要保持二叉搜索树 `左子树 < 根节点 < 右子树` 的性质, 则找到目标节点的中序遍历前驱或后继节点 (右子树的最小节点或左子树的最大节点)，将其值替换目标节点的值。
 
 <v-switch>
   <template #1> 
@@ -550,7 +577,7 @@ li {
 
 删除节点操作同样使用 $O(\log n)$ 时间复杂度，其中查找待删除节点需要 $O(\log n)$ 时间，获取中序遍历后继节点需要 $O(\log n)$ 时间。
 
-```py {*}{maxHeight:'400px'}
+```py {*|2-18|20-22|24-36|38-|*}{maxHeight:'400px'}
 def remove(self, num: int):
     """删除节点"""
     # 若树为空，直接提前返回
@@ -569,6 +596,7 @@ def remove(self, num: int):
         # 待删除节点在 cur 的左子树中
         else:
             cur = cur.left
+
     # 若无待删除节点，则直接返回
     if cur is None:
         return
@@ -586,6 +614,7 @@ def remove(self, num: int):
         else:
             # 若删除节点为根节点，则重新指定根节点
             self._root = child
+
     # 子节点数量 = 2
     else:
         # 获取中序遍历中 cur 的下一个节点
@@ -600,14 +629,14 @@ def remove(self, num: int):
 
 ---
 
-## 二叉搜索树的效率
+### 二叉搜索树的效率
 
 给定一组数据，我们考虑使用数组或二叉搜索树存储。观察下表，二叉搜索树的各项操作的时间复杂度都是对数阶，具有稳定且高效的性能。只有在高频添加、低频查找删除数据的场景下，数组比二叉搜索树的效率更高。
 
-| 操作 | 数组   | 二叉搜索树  |
+| 操作 | 无序数组   | 二叉搜索树  |
 | ---- | ------ | ----------- |
-| 查找 | $O(1)$ | $O(\log n)$ |
-| 插入 | $O(n)$ | $O(\log n)$ |
+| 查找 | $O(n)$ | $O(\log n)$ |
+| 插入 | $O(1)$ | $O(\log n)$ |
 | 删除 | $O(n)$ | $O(\log n)$ |
 
 场景分析：
@@ -618,17 +647,17 @@ def remove(self, num: int):
 
 ---
 
-## 二叉搜索树的局限性
+### 二叉搜索树的局限性
 
 在理想情况下，二叉搜索树是“平衡”的，这样就可以在 $O(\log n)$ 时间内完成查找、插入和删除操作。然而，如果我们在二叉搜索树中不断地插入和删除节点，使其不平衡，二叉搜索树的性能将会下降。当二叉搜索树退化为链表时，这些操作的时间复杂度将退化为 $O(n)$ 。
 
-<img class="w-150 mx-auto" border="rounded" src="../images/tree/degenerate.png">
+<img class="w-170 mx-auto" border="rounded" src="../images/tree/degenerate.png">
 
 ---
 
 ## AVL 树
 
-1962 年 G. M. Adelson-Velsky (AV) 和 E. M. Landis (L)在论文“An algorithm for the organization of information”中提出了 AVL 树。论文中详细描述了一系列操作，确保在持续添加和删除节点后，AVL 树不会退化，从而使得各种操作的时间复杂度保持在 $O(\log n)$ 级别。换句话说，在需要频繁进行增删查改操作的场景中，AVL 树能始终保持高效的数据操作性能，具有很好的应用价值。
+1962 年 G. M. Adelson-Velsky (AV) 和 E. M. Landis (L)在论文 `An algorithm for the organization of information` 中提出了 `AVL` 树。论文中详细描述了一系列操作，确保在持续添加和删除节点后，`AVL` 树不会退化，从而使得各种操作的时间复杂度保持在 $O(\log n)$ 级别。换句话说，在需要频繁进行增删查改操作的场景中，`AVL` 树能始终保持高效的数据操作性能，具有很好的应用价值。
 
 <img class="w-150 mx-auto" border="rounded" src="../images/tree/avl.png">
 
@@ -636,9 +665,7 @@ def remove(self, num: int):
 
 ### AVL 树的定义
 
-AVL 树既是二叉搜索树，也是平衡二叉树，同时满足这两类二叉树的所有性质，因此是一种平衡二叉搜索树`balanced binary search tree`。
-
-节点高度: 由于 AVL 树的相关操作需要获取节点高度，因此我们需要为节点类添加 `height` 变量：
+`AVL` 树既是二叉搜索树，也是平衡二叉树，同时满足这两类二叉树的所有性质，因此是一种平衡二叉搜索树`balanced binary search tree`。
 
 ```py
 class TreeNode:
@@ -661,12 +688,14 @@ def update_height(self, node: TreeNode | None):
     # 节点高度等于最高子树高度 + 1
     node.height = max([self.height(node.left), self.height(node.right)]) + 1
 ```
-
+<!--
+节点高度: 由于 AVL 树的相关操作需要获取节点高度，因此我们需要为节点类添加 `height` 变量：节点的高度等于左右子树高度的最大值加 1。同时，我们将获取节点高度和更新节点高度的功能封装成函数，方便后续使用。
+-->
 ---
 
 ### 节点平衡因子
 
-节点的平衡因子 `balance factor` 定义为节点左子树的高度减去右子树的高度，同时规定空节点的平衡因子为 0。在 AVL 树中，每个节点的平衡因子只能是 `-1`、`0` 或 `1`，否则就需要通过旋转操作来调整树的结构。我们同样将获取节点平衡因子的功能封装成函数，方便后续使用：
+节点的平衡因子 `balance factor` 定义为节点左子树的高度减去右子树的高度，同时规定空节点的平衡因子为 `0`。在 AVL 树中，每个节点的平衡因子只能是 `-1`、`0` 或 `1`，否则就需要通过旋转操作来调整树的结构。我们同样将获取节点平衡因子的功能封装成函数，方便后续使用：
 
 ```py
 def balance_factor(self, node: TreeNode | None) -> int:
@@ -682,24 +711,24 @@ def balance_factor(self, node: TreeNode | None) -> int:
 
 ## AVL 树旋转
 
-AVL 树的特点在于“旋转”操作，它能够在不影响二叉树的中序遍历序列的前提下，使失衡节点重新恢复平衡。换句话说，旋转操作既能保持“二叉搜索树”的性质，也能使树重新变为“平衡二叉树”。
+AVL 树的特点在于 `旋转` 操作，它能够在不影响二叉树的中序遍历序列的前提下，使失衡节点重新恢复平衡。换句话说，旋转操作既能保持 `二叉搜索树` 的性质，也能使树重新变为 `平衡二叉树`。
 
-我们将平衡因子绝对值 > 1 的节点称为“失衡节点”。根据节点失衡情况的不同，旋转操作分为四种：右旋、左旋、先右旋后左旋、先左旋后右旋。下面详细介绍这些旋转操作。
+我们将 `平衡因子绝对值 > 1` 的节点称为“失衡节点”。根据节点失衡情况的不同，旋转操作分为四种：右旋、左旋、先右旋后左旋、先左旋后右旋。下面详细介绍这些旋转操作。
 
 1. 右旋 `right rotation`
 
 <v-switch>
   <template #1> 
-        <img class="w-140 mx-auto" border="rounded" src="../images/tree/avl/rr1.png">
+        <img class="w-130 mx-auto" border="rounded" src="../images/tree/avl/rr1.png">
     </template>
     <template #2>
-        <img class="w-140 mx-auto" border="rounded" src="../images/tree/avl/rr2.png">
+        <img class="w-130 mx-auto" border="rounded" src="../images/tree/avl/rr2.png">
     </template>
     <template #3>
-        <img class="w-140 mx-auto" border="rounded" src="../images/tree/avl/rr3.png">
+        <img class="w-130 mx-auto" border="rounded" src="../images/tree/avl/rr3.png">
     </template>
     <template #4>
-        <img class="w-140 mx-auto" border="rounded" src="../images/tree/avl/rr4.png">
+        <img class="w-130 mx-auto" border="rounded" src="../images/tree/avl/rr4.png">
     </template>
 </v-switch>
 
@@ -708,8 +737,6 @@ AVL 树的特点在于“旋转”操作，它能够在不影响二叉树的中�
 -->
 
 ---
-
-当节点 child 有右子节点（记为 `grand_child` ）时
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/rr_grandchild.png">
 
@@ -729,7 +756,7 @@ def right_rotate(self, node: TreeNode | None) -> TreeNode | None:
 ```
 
 <!--
-需要在右旋中添加一步：将 `grand_child` 作为 `node` 的左子节点。
+当节点 child 有右子节点（记为 `grand_child` ）时，我们需要在右旋中添加一步：将 `grand_child` 作为 `node` 的左子节点。
 -->
 
 ---
@@ -738,17 +765,15 @@ def right_rotate(self, node: TreeNode | None) -> TreeNode | None:
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/lr.png">
 
-当节点 `child` 有左子节点（记为 `grand_child` ）时
-
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/lr.png">
 
 <!--
-需要在左旋中添加一步：将 `grand_child` 作为 node 的右子节点。
+当节点 `child` 有左子节点（记为 `grand_child` ）时, 我们需要在左旋中添加一步：将 `grand_child` 作为 node 的右子节点。
 -->
 
 ---
 
-可以观察到，右旋和左旋操作在逻辑上是镜像对称的，它们分别解决的两种失衡情况也是对称的。基于对称性，我们只需将右旋的实现代码中的所有的 left 替换为 right ，将所有的 right 替换为 left ，即可得到左旋的实现代码：
+可以观察到，右旋和左旋操作在逻辑上是镜像对称的，它们分别解决的两种失衡情况也是对称的。基于对称性，我们只需将右旋的实现代码中的所有的 `left` 替换为 `right` ，将所有的 `right` 替换为 `left` ，即可得到左旋的实现代码：
 
 ````md magic-move
 ```py
@@ -784,11 +809,11 @@ def left_rotate(self, node: TreeNode | None) -> TreeNode | None:
 
 ---
 
-3. 先左旋后右旋 `left-right rotation`, 需要先对 child 执行“左旋”，再对 node 执行“右旋”。
+3. 先左旋后右旋 `left-right rotation`, 需要先对 `child` 执行“左旋”，再对 `node` 执行“右旋”。
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/lr_rotation.png">
 
-4. 先右旋后左旋 `right-left rotation`, 需要先对 child 执行“右旋”，再对 node 执行“左旋”。
+4. 先右旋后左旋 `right-left rotation`, 需要先对 `child` 执行“右旋”，再对 `node` 执行“左旋”。
 
 <img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/rl_rotation.png">
 
@@ -801,19 +826,19 @@ def left_rotate(self, node: TreeNode | None) -> TreeNode | None:
 
 我们通过判断失衡节点的平衡因子以及较高一侧子节点的平衡因子的正负号，来确定失衡节点属于图中的哪种情况。
 
-- 若失衡节点的平衡因子 > 1 (左偏树)，且子节点的平衡因子 >= 0，则执行右旋操作。
-- 若失衡节点的平衡因子 > 1 (左偏树)，且子节点的平衡因子 < 0，则执行先左旋后右旋操作。
-- 若失衡节点的平衡因子 < -1 (右偏树)，且子节点的平衡因子 > 0，则执行先右旋后左旋操作。
-- 若失衡节点的平衡因子 < -1 (右偏树)，且子节点的平衡因子 <= 0，则执行左旋操作。
+- 若`失衡节点的平衡因子 > 1` (左偏树)，且`子节点的平衡因子 >= 0`，则执行右旋操作。
+- 若`失衡节点的平衡因子 > 1` (左偏树)，且`子节点的平衡因子 < 0`，则执行先左旋后右旋操作。
+- 若`失衡节点的平衡因子 < -1` (右偏树)，且`子节点的平衡因子 > 0`，则执行先右旋后左旋操作。
+- 若`失衡节点的平衡因子 < -1` (右偏树)，且`子节点的平衡因子 <= 0`，则执行左旋操作。
 
 
-<img class="w-100 mx-auto" border="rounded" src="../images/tree/avl/rotation_decision.png">
+<img class="w-120 mx-auto" border="rounded" src="../images/tree/avl/rotation_decision.png">
 
 ---
 
 为了便于使用，我们将旋转操作封装成一个函数。对各种失衡情况进行旋转，使失衡节点重新恢复平衡。
 
-```py
+```py {*|3-4|5-13|14-22|23-|*}
 def rotate(self, node: TreeNode | None) -> TreeNode | None:
     """执行旋转操作，使该子树重新恢复平衡"""
     # 获取节点 node 的平衡因子

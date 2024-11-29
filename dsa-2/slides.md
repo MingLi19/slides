@@ -46,7 +46,7 @@ hideInToc: true
 
 # 课程大纲
 
-<Toc minDepth="1" maxDepth="2" columns="4" listClass="text-sm"></Toc>
+<Toc minDepth="1" maxDepth="2" columns="3" listClass="text-sm"></Toc>
 
 ---
 layout: center
@@ -72,17 +72,7 @@ src: ./pages/sorting.md
 layout: center
 ---
 
-# 动态规划
-
----
-src: ./pages/dynamic_programming.md
----
-
----
-layout: center
----
-
-# 树 Tree
+# 树
 
 ---
 src: ./pages/tree.md
