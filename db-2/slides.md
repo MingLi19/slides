@@ -68,4 +68,18 @@ layout: center
 src: ./pages/neo4j.md
 ---
 
+---
+layout: center
+---
+
+# 数据可视化 Data Visualization
+
+---
+src: ./pages/visualization.md
+---
+
 # Q & A
+
+---
+
+# Thank You!

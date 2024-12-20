@@ -164,17 +164,23 @@ CREATE (n2:Person {name: 'Tom Cruise', born: 1962})
 CREATE (m1:Movie {title: 'Top Gun', released: 1986})
 
 // 创建关系
-MATCH (a:Person), (m:Movie) WHERE a.name = 'Tom Cruise' AND m.title = 'Top Gun' CREATE (a)-[r:ACTED_IN]->(m) RETURN r
-MATCH (a:Person), (b:Person) WHERE a.name = 'Tom Cruise' AND b.name = 'Tom Hanks' CREATE (a)-[r:KNOWS]->(b) RETURN r
+MATCH (a:Person), (m:Movie) WHERE a.name = 'Tom Cruise' AND m.title = 'Top Gun' CREATE (a)-[r:ACTED_IN]->(m) 
+MATCH (a:Person), (b:Person) WHERE a.name = 'Tom Cruise' AND b.name = 'Tom Hanks' CREATE (a)-[r:KNOWS]->(b) 
 
 // 查询节点
 MATCH (n:Person) WHERE n.name = 'Tom Hanks' RETURN n
 
 // 查询关系
+MATCH (a:Person)-[r:KNOWS]->(b:Person) RETURN a, r, b
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]->(m) RETURN m
+
+// 更新节点
 MATCH (n:Person) WHERE n.name = 'Tom Hanks' SET n.born = 1957
 
 // 删除节点
 MATCH (n:Person) WHERE n.name = 'Tom Hanks' DELETE n
+
+// 删除所有节点
 MATCH (n) DETACH DELETE n
 ```
 
@@ -184,6 +190,11 @@ MATCH是查询操作，Person是标签，代表节点的类型。WHERE是过滤�
 SET是更新操作，n.age = 30是更新操作，表示将age属性值更新为30。
 DELETE是删除操作，表示删除查询到的节点。
 -->
+---
+layout: center
+---
+
+## 示例应用
 
 ---
 
