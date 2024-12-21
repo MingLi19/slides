@@ -1,15 +1,12 @@
 ## 什么是图数据库（Graph Database）
 
+<br>
+
 图数据库是基于图论实现的一种NoSQL数据库，其数据存储结构和数据查询方式都是以图论为基础的，图数据库主要用于存储连接更多的数据。
 
->图论 ( Graph Theory ) 是数学的一个分支。它以图为研究对象图论中的图是由若干给定的点及连接两点的线所构成的图形，这种图形通常用来描述某些事物之间的某种特定关系，用点代表事物，用连接两点的线表示相应两个事物间具有这种关系。
-
 <br>
-<div v-click>
-图（Graph）是一种数据结构，由节点（Node）和边（Edge）组成，节点可以通过边相连。以下是包含三个节点（圆圈）和三个边（箭头）的图像。
 
-<img class="w-60" src="../images/graph.png">
-</div>
+>图论 ( Graph Theory ) 是数学的一个分支。它以图为研究对象图论中的图是由若干给定的点及连接两点的线所构成的图形，这种图形通常用来描述某些事物之间的某种特定关系，用点代表事物，用连接两点的线表示相应两个事物间具有这种关系。
 
 ---
 
@@ -112,7 +109,7 @@ Neo4j的数据模型是一个图，由节点和关系组成。节点是图的基
 
 </v-clicks>
 
-<img class="w-100" src="../images/neo4j_basic.png">
+<img class="w-100  mx-auto" src="../images/neo4j_basic.png">
 
 ---
 
@@ -151,7 +148,7 @@ docker run --name neo4j -p 7474:7474 -p 7687:7687 -d neo4j
 ```
 - 安装Neo4j Client Neo4j Desktop
 
-<img class="w-100" src="../images/neo4j_desktop.png">
+<img class="w-130 mx-auto" src="../images/neo4j_desktop.png">
 
 ---
 
@@ -187,9 +184,31 @@ MATCH (n) DETACH DELETE n
 <!--
 CREATE是创建操作，Person是标签，代表节点的类型。花括号{}代表节点的属性，属性类似Python的字典。这条语句的含义就是创建一个标签为Person的节点，该节点具有一个name属性，属性值是John。
 MATCH是查询操作，Person是标签，代表节点的类型。WHERE是过滤条件，n.name = 'John'是过滤条件，表示查询name属性值为John的节点。RETURN是返回操作，表示返回查询结果。
-SET是更新操作，n.age = 30是更新操作，表示将age属性值更新为30。
+SET是更新操作，n.born = 1957 是更新操作，表示将age属性值更新为30。
 DELETE是删除操作，表示删除查询到的节点。
 -->
+---
+
+### 模拟地图
+
+```cypher
+CREATE (a:Location {name: 'A'}),
+       (b:Location {name: 'B'}),
+       (c:Location {name: 'C'}),
+       (d:Location {name: 'D'}),
+       (e:Location {name: 'E'}),
+       (f:Location {name: 'F'}),
+       (a)-[:ROAD {cost: 50}]->(b),
+       (a)-[:ROAD {cost: 50}]->(c),
+       (a)-[:ROAD {cost: 100}]->(d),
+       (b)-[:ROAD {cost: 40}]->(d),
+       (c)-[:ROAD {cost: 40}]->(d),
+       (c)-[:ROAD {cost: 80}]->(e),
+       (d)-[:ROAD {cost: 30}]->(e),
+       (d)-[:ROAD {cost: 80}]->(f),
+       (e)-[:ROAD {cost: 40}]->(f);
+```
+
 ---
 layout: center
 ---
